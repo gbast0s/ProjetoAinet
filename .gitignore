@@ -1,4 +1,4 @@
 /vendor
 /database
 /public/storage/
-/storage/app/
+/storage/app/*
