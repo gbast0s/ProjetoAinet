@@ -45,7 +45,6 @@
                     <td>{{$staff->name}}</td>
                     <td>{{$staff->email}}</td>
                     <td>{{$staff->tipo}}</td>
-                    <td>{{$staff->bloqueado}}</td>
                     @if($staff->bloqueado)
                         <td>Sim</td>
                     @else
