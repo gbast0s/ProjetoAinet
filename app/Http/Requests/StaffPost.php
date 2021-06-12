@@ -24,16 +24,34 @@ class StaffPost extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' =>                   'required',
-            'email' => [
-                'required',
-                'email',
-                (!is_null($this->staff)) ? Rule::unique('users', 'email')->ignore($this->staff->id) : Rule::unique('users', 'email'),
-            ],            
-            'tipo' =>                   'required',
-            'password' =>               'required',
-            'foto' =>                   'image|max:8192',   // Máximum size = 8Mb
-        ];
+        if(request()->isMethod('put')) // could be patch as well
+        {
+             // Update rules here - Don't require image here
+             return [
+                'name' =>                   'required',
+                'email' => [
+                    'required',
+                    'email',
+                    (!is_null($this->staff)) ? Rule::unique('users', 'email')->ignore($this->staff->id) : Rule::unique('users', 'email'),
+                ],            
+                'tipo' =>                   'required',
+                'password' =>               'nullable',
+                'foto' =>                   'image|max:8192',   // Máximum size = 8Mb
+            ];
+
+        }else{
+             // store rules here - require image here
+             return [
+                'name' =>                   'required',
+                'email' => [
+                    'required',
+                    'email',
+                    (!is_null($this->staff)) ? Rule::unique('users', 'email')->ignore($this->staff->id) : Rule::unique('users', 'email'),
+                ],            
+                'tipo' =>                   'required',
+                'password' =>               'required',
+                'foto' =>                   'image|max:8192',   // Máximum size = 8Mb
+            ];
+        }
     }
 }

@@ -107,13 +107,13 @@ class StaffController extends Controller
     {
         $validated_data = $request->validated();
 
-        // $request->validate([
-        //     'email' => 'required|email|unique:users,email,'.$staff->id,
-        // ]);
         $staff->email = $validated_data['email'];
         $staff->name = $validated_data['name'];
         $staff->tipo = $validated_data['tipo'];
-        $staff->password = Hash::make($validated_data['password']);
+        if($validated_data['password'])
+        {
+            $staff->password = Hash::make($validated_data['password']);
+        }
  
 
         if ($request->hasFile('foto')) {
