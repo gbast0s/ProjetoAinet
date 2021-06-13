@@ -37,14 +37,14 @@ function mudar_tshirt() {
 }
 
 function mostrarConta() {
-  document.getElementById("suaConta").style.display = "flex";
-  document.getElementById("suasEncomendas").style.display = "none";
-  document.getElementById("editar").style.display = "none";
+	document.getElementById("suaConta").style.display = "flex";
+	document.getElementById("suasEncomendas").style.display = "none";
+	document.getElementById("editar").style.display = "none";
 }
 function alterarConta() {
-  document.getElementById("suaConta").style.display = "none";
-  document.getElementById("suasEncomendas").style.display = "none";
-  document.getElementById("editar").style.display = "flex";
+	document.getElementById("suaConta").style.display = "none";
+	document.getElementById("suasEncomendas").style.display = "none";
+	document.getElementById("editar").style.display = "flex";
 }
 function mostrarEncomenda() {
   document.getElementById("suaConta").style.display = "none";

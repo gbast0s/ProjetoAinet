@@ -226,7 +226,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            @if ($encomendas)
+                            @if($encomendas)
                                 {{ $encomendas->withQueryString()->links() }}
                             @endif
                         </div>

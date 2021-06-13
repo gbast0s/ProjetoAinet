@@ -178,6 +178,9 @@
 			@if($errors->first())
 				<script> window.onload = function() {alterarConta();}; </script>
 			@endif
+			@if(!empty(request()->all()) && !$errors->first())
+				<script> window.onload = function() {mostrarEncomenda();}; </script>
+			@endif
 		@endif
 	</body>
 </html>
