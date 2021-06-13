@@ -235,9 +235,6 @@
 			</div>
 		</div>
 	</section>
-    @if($errors->first())
-        <script> window.onload = function() {alterarConta();}; </script>
-    @endif
 @endsection
 
 

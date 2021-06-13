@@ -174,5 +174,10 @@
 		<script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
 		<script src="{{ asset('js/price-range.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
+		@if(Route::currentRouteName()=='usuario.perfil')
+			@if($errors->first())
+				<script> window.onload = function() {alterarConta();}; </script>
+			@endif
+		@endif
 	</body>
 </html>
