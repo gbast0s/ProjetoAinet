@@ -7,7 +7,7 @@
         @method('PUT')
         <div class="form-group">
             <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" name="password" id="inputPassword" value="">
+            <input type="password" class="form-control" name="password" id="inputPassword" value="" required>
             @error('password')
                 <div class="small text-danger">{{$message}}</div>
             @enderror

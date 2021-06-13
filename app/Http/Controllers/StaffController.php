@@ -145,11 +145,16 @@ class StaffController extends Controller
         if($request->password)
         {
             $staff->password = Hash::make($request->password);
+
+            $staff->save();
+
+            return redirect()->route('admin.alterarpass', $staff)
+            ->with('alert-msg', 'A sua password foi alterada com sucesso!')
+            ->with('alert-type', 'success');
         }
 
-        $staff->save();
         return redirect()->route('admin.alterarpass', $staff)
-            ->with('alert-msg', 'A sua password foi alterada com sucesso!')
+            ->with('alert-msg', 'A sua password permanece inalterada!')
             ->with('alert-type', 'success');
     }
 
