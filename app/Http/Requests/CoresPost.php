@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class CoresPost extends FormRequest
 {
@@ -13,7 +15,7 @@ class CoresPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,24 +25,16 @@ class CoresPost extends FormRequest
      */
     public function rules()
     {
-        if(request()->isMethod('put')) // could be patch as well
-        {
-             // Update rules here - Don't require image here
-             return [
-                'name' =>                   'required',           
-                'codigo' =>                 'required|regex:/^#?(([a-f0-9]{3}){1,2})$/i',
-                'password' =>               'nullable',
-                'foto' =>                   'image|max:8192',   // Máximum size = 8Mb
-            ];
-
-        }else{
-             // store rules here - require image here
-             return [
-                'name' =>                   'required',           
-                'codigo' =>                 'required|regex:/^#?(([a-f0-9]{3}){1,2})$/i',
-                'password' =>               'required',
-                'foto' =>                   'image|max:8192',   // Máximum size = 8Mb
-            ];
-        }
+            // store rules here - require image here
+            return [
+            'nome' =>               'required',           
+            'codigo' => [
+                'required',
+                'regex:/^#?(([a-f0-9]{3}){1,2})$/i',
+                (!is_null($this->cor)) ? Rule::unique('cores', 'codigo')->ignore($this->cor->codigo, 'codigo') : Rule::unique('cores', 'codigo'),
+            ], 
+            'foto' =>               'required|image|max:8192|dimensions:width=520,height=560',
+        ];
+        
     }
 }

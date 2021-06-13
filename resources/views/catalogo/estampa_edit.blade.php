@@ -5,7 +5,7 @@
     <form method="POST" action="{{route('admin.estampas.update', ['estampa' => $estampa]) }}" class="form-group" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        @include('catalogo.partials_estampas.estampas_create-edit')
+        @include('catalogo.partials.estampas_create-edit')
         @isset($estampa->imagem_url)
             <div class="form-group">
                 <img src="{{$estampa->imagem_url ? asset('storage/estampas/' . $estampa->imagem_url) : asset('img/default_img.png') }}"

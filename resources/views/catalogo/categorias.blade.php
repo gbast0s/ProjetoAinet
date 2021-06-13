@@ -18,7 +18,7 @@
         @foreach($categorias as $categoria)
             <tr>
                 <td>{{$categoria->nome}}</td>
-                <td><a href=" {{ route('admin.categorias.edit', ['categoria' => $categoria]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a></td>
+                <td><a href="{{ route('admin.categorias.edit', ['categoria' => $categoria]) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a></td>
                 <td>
                         <form action="{{route('admin.categorias.destroy', ['categoria' => $categoria])}}" method="POST">
                             @csrf

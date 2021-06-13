@@ -10,5 +10,10 @@ class Cores extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $primaryKey = 'codigo';
+    protected $keyType = 'string';
+
     protected $fillable = ['codigo', 'nome'];
+
+    public $timestamps = false;
 }

@@ -9,6 +9,8 @@ use App\Models\Categorias;
 use App\Models\Clientes;
 use App\Models\Cores;
 use App\Models\Encomendas;
+use App\Http\Requests\CoresPost;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -171,5 +173,89 @@ class DashboardController extends Controller
 
         return view('catalogo.cores')
             ->withCores($cores);
+    }
+
+    public function create_cor()
+    {
+
+        $cor = new Cores();
+
+        return view('catalogo.cores_create')
+            ->withCor($cor);
+    }
+
+    public function store_cor(CoresPost $request)
+    {
+
+        $validated_data = $request->validated();
+
+        $newCor = new Cores();
+        $newCor->nome = $validated_data['nome'];
+        $newCor->codigo = $validated_data['codigo'];
+
+        if ($request->hasFile('foto')) {
+            $request->foto->storeAs('public/tshirt_base', $validated_data['codigo'].'.jpg');
+        }
+
+
+        $newCor->save();
+
+        return redirect()->route('admin.cores')
+            ->with('alert-msg', 'Cor [ '. $newCor->nome .' ] foi criada com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
+    public function edit_cor(Cores $cor)
+    {
+        return view('catalogo.cores_edit')
+            ->withCor($cor);
+    }
+
+    public function update_cor(CoresPost $request, Cores $cor)
+    {
+        $validated_data = $request->validated();
+
+        $cor->nome = $validated_data['nome'];
+        $oldImage = $cor->codigo;
+        $cor->codigo = $validated_data['codigo'];
+
+        Storage::delete('public/tshirt_base/' . $oldImage. '.jpg');
+
+        if ($request->hasFile('foto')) {
+            $request->foto->storeAs('public/tshirt_base', $validated_data['codigo'].'.jpg');
+        }
+
+        $cor->save();
+        return redirect()->route('admin.cores')
+            ->with('alert-msg', 'Cor "' . $cor->nome . '" foi alterada com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
+    public function destroy_cor(Cores $cor)
+    {
+        $oldName = $cor->nome;
+        $oldImage = $cor->codigo;
+
+        try {
+            Storage::delete('public/tshirt_base/' . $oldImage. '.jpg');
+
+            $cor->delete();
+            return redirect()->route('admin.cores')
+                ->with('alert-msg', 'Cor "' . $oldName . '" foi apagada com sucesso!')
+                ->with('alert-type', 'success');
+        } catch (\Throwable $th) {
+            // $th é a exceção lançada pelo sistema - por norma, erro ocorre no servidor BD MySQL
+            // Descomentar a próxima linha para verificar qual a informação que a exceção tem
+
+            if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                return redirect()->route('admin.cores')
+                    ->with('alert-msg', 'Não foi possível apagar a cor "' . $oldName . '", porque esta já está em uso!')
+                    ->with('alert-type', 'danger');
+            } else {
+                return redirect()->route('admin.cores')
+                    ->with('alert-msg', 'Não foi possível apagar a cor "' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                    ->with('alert-type', 'danger');
+            }
+        }
     }
 }

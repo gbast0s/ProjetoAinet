@@ -105,6 +105,11 @@ Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(fun
 
         //Cores
         Route::get('cores', [DashboardController::class, 'view_cores'])->name('cores');
+        Route::get('cores/create', [DashboardController::class, 'create_cor'])->name('cores.create');
+        Route::post('cores', [DashboardController::class, 'store_cor'])->name('cores.store');
+        Route::get('cores/{cor}/edit', [DashboardController::class, 'edit_cor'])->name('cores.edit');
+        Route::put('cores/{cor}', [DashboardController::class, 'update_cor'])->name('cores.update');
+        Route::delete('cores/{cor}', [DashboardController::class, 'destroy_cor'])->name('cores.destroy');
 
     });
 });

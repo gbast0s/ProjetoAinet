@@ -3,7 +3,7 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-3">
-        <a href="" class="btn btn-success" role="button" aria-pressed="true">Nova Cor</a>
+        <a href="{{ route('admin.cores.create') }}" class="btn btn-success" role="button" aria-pressed="true">Nova Cor</a>
     </div>
 </div>
 <table class="table">
@@ -22,9 +22,9 @@
                 <td><div class="colors" style="background: #{{ $cor->codigo }}"></div></td>
                 <td>#{{$cor->codigo}}</td>
                 <td>{{$cor->nome}}</td>
-                <td><a href="" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a></td>
+                <td><a href="{{ route('admin.cores.edit', $cor) }}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Alterar</a></td>
                 <td>
-                    <form action="" method="POST">
+                    <form action="{{route('admin.cores.destroy', ['cor' => $cor])}}" method="POST">
                         @csrf
                         @method("DELETE")
                         <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
