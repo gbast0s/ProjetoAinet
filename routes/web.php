@@ -11,6 +11,8 @@ use App\Http\Controllers\EstampasController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Auth;
 
+use App\Policies\StaffPolicy;
+
 // Route::get('/', function () {
 //     //return view('welcome');
 //     return view('pages.index');
@@ -47,7 +49,12 @@ Route::middleware('estampaValida')->prefix('catalogo')->name('catalogo.')->group
 
 Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('/encomendas', [DashboardController::class, 'view_encomendas'])->name('encomendas');
+    Route::get('encomendas', [DashboardController::class, 'view_encomendas'])->name('encomendas');
+    Route::get('perfil/{staff}/alterarpassword', [StaffController::class, 'staffChangePass'])->name('alterarpass');
+    Route::put('perfil/{staff}/alterarpassword', [StaffController::class, 'updatestaffPass'])->name('pass.update');
+
+        //->middleware('can:view, staff');
+
 
     Route::middleware(['admin'])->group(function() {
 

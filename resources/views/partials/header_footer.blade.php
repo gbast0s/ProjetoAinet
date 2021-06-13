@@ -174,9 +174,5 @@
 		<script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
 		<script src="{{ asset('js/price-range.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
-
-		@if($errors->first())
-			<script> window.onload = function() {alterarConta();}; </script>
-		@endif
 	</body>
 </html>

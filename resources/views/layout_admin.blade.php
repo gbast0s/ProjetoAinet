@@ -164,6 +164,12 @@
                       Perfil
                       </a>
                       <div class="dropdown-divider"></div>
+                    @else
+                      <a class="dropdown-item" href="{{ route('admin.alterarpass', auth()->user()) }}">
+                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Alterar Password
+                      </a>
+                      <div class="dropdown-divider"></div>
                     @endif
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

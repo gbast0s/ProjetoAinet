@@ -128,6 +128,31 @@ class StaffController extends Controller
             ->with('alert-type', 'success');
     }
 
+    public function staffChangePass(User $staff)
+    {
+        $this->authorize('can_view_change_pass', $staff);
+
+
+        return view('dashboard.staff_change_pass')
+            ->withStaff($staff);
+    }
+
+    public function updatestaffPass(Request $request, User $staff)
+    {
+
+        $this->authorize('can_change_pass', $staff);
+
+        if($request->password)
+        {
+            $staff->password = Hash::make($request->password);
+        }
+
+        $staff->save();
+        return redirect()->route('admin.alterarpass', $staff)
+            ->with('alert-msg', 'A sua password foi alterada com sucesso!')
+            ->with('alert-type', 'success');
+    }
+
     public function destroy(User $staff)
     {
         $oldName = $staff->name;
