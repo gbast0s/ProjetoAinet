@@ -14,7 +14,9 @@ class ClienteController extends Controller
     public function perfil()
     {
         $cliente = Clientes::where('id', Auth::user()->id)->first();
-        $encomendas = Encomendas::where('cliente_id',  Auth::user()->id);
+        $qry = Encomendas::where('cliente_id',  Auth::user()->id);
+
+        $encomendas = $qry->paginate(10);
 
         return view('perfil.index')
             ->withCliente($cliente)

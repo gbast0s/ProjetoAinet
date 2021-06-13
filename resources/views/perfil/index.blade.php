@@ -90,7 +90,7 @@
                         <h4>Edição de dados da conta</h4>
                         <div class="dados-cliente">
                             <a>Neste espaço, podes alterar os teus dados.</a>
-                            <p>Dados de cliente para alterar: </p>
+                            <p>Dados de cliente para alterar </p>
                             <div class="lista-editar">
                                 <form class="lista-editar2" method="POST" action=" {{ route('usuario.clientes.update', ['cliente' => $cliente]) }}" class="input" enctype="multipart/form-data">
                                     <div class="lista-dados-cliente">
@@ -181,10 +181,55 @@
                         </div>
                     </div>
                     <div class="encomendas" id="suasEncomendas">
-                        <h4>Edição de dados da conta</h4>
+                        <h4>As minhas encomendas</h4>
                         <div class="dados-cliente">
-                            <a>Neste espaço, podes alterar os teus dados.</a>
-                            <p>Lista de encomendas registadas: </p>
+                            <a>Neste espaço, podes observar todas as encomendas realizadas por ti.</a>
+                            <p>Lista de encomendas registadas </p>
+                            <div class="tabela-encomendas">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Estado</th>
+                                            <th>Data da criação</th>
+                                            <th>Preço (€)</th>
+                                            <th>Notas</th>
+                                            <th>NIF</th>
+                                            <th>Endereço</th>
+                                            <th>Tipo de pagamento</th>
+                                            <th>Referência de pagamento</th>
+                                            <th>Recibo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($encomendas)
+                                            @foreach ($encomendas as $enc)
+                                            <tr>
+                                                @if ($enc->estado == "fechada")
+                                                    <td>Fechada</td>
+                                                @elseif ($enc->estado == "anulada")
+                                                    <td>Anulada</td>
+                                                @endif
+                                                <td>{{ $enc->data }}</td>
+                                                <td>{{ $enc->preco_total }}</td>
+                                                <td>{{ $enc->notas }}</td>
+                                                <td>{{ $enc->nif }}</td>
+                                                <td>{{ $enc->endereco }}</td>
+                                                <td>{{ $enc->tipo_pagamento }}</td>
+                                                <td>{{ $enc->ref_pagamento }}</td>
+                                                @if ($enc->recibo_url)
+                                                    <td><button type="submit" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Ver recibo</button></td>
+                                                @else
+                                                    <td><button type="submit" class="btn btn-secondary btn-sm null" role="button" aria-pressed="true">Ver recibo</button></td>
+                                                @endif
+                                            </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                            @if ($encomendas)
+                                {{ $encomendas->withQueryString()->links() }}
+                            @endif
                         </div>
                     </div>
                 </div>
