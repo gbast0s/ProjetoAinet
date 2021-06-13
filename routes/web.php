@@ -103,6 +103,9 @@ Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(fun
         Route::put('estampas/{estampa}', [EstampasController::class, 'update'])->name('estampas.update');
         Route::delete('estampas/{estampa}', [EstampasController::class, 'destroy'])->name('estampas.destroy');
 
+        //Cores
+        Route::get('cores', [DashboardController::class, 'view_cores'])->name('cores');
+
     });
 });
 

@@ -83,8 +83,8 @@
           @endif
 
           @if(Auth::user() && Auth::user()->isAdmin())
-            <li class="nav-item ">
-              <a class="nav-link" href="">
+            <li class="nav-item {{Route::currentRouteName()=='admin.cores'? 'active': ''}}">
+              <a class="nav-link" href="{{ route('admin.cores') }}">
               <i class="fas fa-tshirt"></i>
               <span>Cores de T-Shirts</span></a>
             </li>

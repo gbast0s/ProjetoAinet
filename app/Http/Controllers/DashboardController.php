@@ -7,9 +7,8 @@ use App\Models\Preco;
 use App\Http\Requests\PrecosPost;
 use App\Models\Categorias;
 use App\Models\Clientes;
+use App\Models\Cores;
 use App\Models\Encomendas;
-use Illuminate\Http\Request;
-use DateTime;
 
 class DashboardController extends Controller
 {
@@ -161,5 +160,16 @@ class DashboardController extends Controller
             ->withTotalClientes($total_clientes)
             ->withEncomendasPendentes($total_encomendas_pendentes)
             ->withTotalGrafico($total_grafico);
+    }
+
+    //Cores
+
+    public function view_cores()
+    {
+        $qry = Cores::Query();
+        $cores = $qry->paginate(10);
+
+        return view('catalogo.cores')
+            ->withCores($cores);
     }
 }
