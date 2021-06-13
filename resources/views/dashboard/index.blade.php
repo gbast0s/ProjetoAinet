@@ -83,15 +83,24 @@
         </div>
     </div>
 
+
     <!-- Content Row -->
     <div class="row-barras">
         <!-- Content Column -->
         <div class="col-xl-8 col-lg-7">
+            <form method="GET" action="{{route('admin.dashboard')}}" class="form-group">
+                <div class="input-group mb-3">
+                    <input type="text" name="ano" class="form-control" value="{{old('ano', $ano)}}" placeholder="Data Encomenda" aria-label="Data Encomenda" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+                    </div>
+                </div>
+            </form>
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Ganhos Mensais {{date('Y')}}</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Ganhos Mensais {{$ano}}</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">

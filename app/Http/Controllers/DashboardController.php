@@ -10,21 +10,25 @@ use App\Models\Clientes;
 use App\Models\Cores;
 use App\Models\Encomendas;
 use App\Http\Requests\CoresPost;
+use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
     // INDEX //
 
-    public function index()
+    public function index(Request $request)
     {
+        $ano = $request->ano ?? date("Y");
+
+
         $ganhosMensais_mes = Encomendas::ganhosMensais();
         $ganhosMensais = $ganhosMensais_mes[0];
         $Mes = $ganhosMensais_mes[1];
         $ganhosAnuais = Encomendas::ganhosAnuais();
         $total_clientes = Clientes::totalClientes();
         $total_encomendas_pendentes = Encomendas::encomendasPendentes();
-        $total_grafico = Encomendas::ganhosMensaisGrafico();
+        $total_grafico = Encomendas::ganhosMensaisGrafico($ano);
 
         return view('dashboard.index')
             ->withGanhosMensais($ganhosMensais)
@@ -32,7 +36,8 @@ class DashboardController extends Controller
             ->withGanhosAnuais($ganhosAnuais)
             ->withTotalClientes($total_clientes)
             ->withEncomendasPendentes($total_encomendas_pendentes)
-            ->withTotalGrafico($total_grafico);
+            ->withTotalGrafico($total_grafico)
+            ->withAno($ano);
     }
 
     // PREÇOS //

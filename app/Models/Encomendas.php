@@ -66,7 +66,7 @@ class Encomendas extends Model
 
     }
 
-    public static function ganhosMensaisGrafico()
+    public static function ganhosMensaisGrafico($ano)
     {
         $total_mes = array( 
         "01" => "0",
@@ -82,7 +82,8 @@ class Encomendas extends Model
         "11" => "0",
         "12" => "0");
 
-        $data = date("Y");
+        //$data = date("Y");
+        $data = $ano;
 
         $qry = Encomendas::where('data', 'LIKE', $data . '%')->where('estado', 'fechada');
 
