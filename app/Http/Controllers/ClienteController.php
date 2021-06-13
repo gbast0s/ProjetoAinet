@@ -134,7 +134,7 @@ class ClienteController extends Controller
     public function updateClientesInfo(ClientesPost $request, Clientes $cliente) {
 
         $validatedData = $request->validated();
-        // dd($validatedData);
+
         if($request->hasFile('foto')) {
             $path = Storage::putFile('public/fotos/', $request->file('foto'));
             $cliente->user->foto_url = basename($path);

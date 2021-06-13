@@ -58,7 +58,6 @@
                                         @else
                                             <p>{{ $cliente->tipo_pagamento }}</p>
                                         @endif
-
                                     </div>
                                 </div>
                                 <div class="lista-dados-cliente">
@@ -115,8 +114,8 @@
                                             <p><input type="text" name="name" class="form-control" value="{{ old('name', $cliente->user->name) }}" required></p>
                                         </div>
                                     </div>
-                                    @error('name')
-                                                <div class="small text-danger">O campo do nome é obrigatório</div>
+                                    @error('name')     
+                                        <div class="small text-danger">O campo do nome é obrigatório</div>
                                     @enderror
                                     <div class="lista-dados-cliente">
                                         <p>NIF do cliente</p>
