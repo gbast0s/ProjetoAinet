@@ -31,17 +31,19 @@ class CompraController extends Controller
             $request->quantidade = 1;
         }
 
+        $carrinho = $request->session()->get('carrinho', []);
+
+
         if($estampa->cliente_id)
         {
-            $preco = $request->quantidade < 5 ? ($preco->preco_un_proprio * $request->quantidade) : ($preco->preco_un_proprio_desconto * $request->quantidade);
+            $preco = $request->quantidade < 5 ? ($preco->preco_un_proprio * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 )  : ($preco->preco_un_proprio_desconto * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 );
 
         }
         else
         {
-            $preco = $request->quantidade < 5 ? ($preco->preco_un_catalogo * $request->quantidade) : ($preco->preco_un_catalogo_desconto * $request->quantidade);
+            $preco = $request->quantidade < 5 ? ($preco->preco_un_catalogo * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 ) : ($preco->preco_un_catalogo_desconto * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 );
         }
 
-        $carrinho = $request->session()->get('carrinho', []);
         $qtd = ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['qtd'] ?? 0) + $request->quantidade;
         $carrinho[$estampa->id."_".$request->cor."_".$request->tam] = [
             'id' => $estampa->id."_".$request->cor."_".$request->tam,
@@ -66,5 +68,10 @@ class CompraController extends Controller
         return back()
             ->with('alert-msg', 'Carrinho foi limpo!')
             ->with('alert-type', 'danger');
+    }
+
+    public function destroy_pedido(Request $request) {
+        dd($request->pedido);
+        
     }
 }

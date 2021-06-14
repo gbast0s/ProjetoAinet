@@ -28,7 +28,7 @@ function mudar_tshirt() {
 	var cor = document.getElementById("mySelect").value;
 
 	for(let i=0; i < Object.keys(cores).length; i++){
-		if(cores[i]['nome'] == cor)
+		if(cores[i]['codigo'] == cor)
 		{
 			document.getElementById('myImage').src='/storage/tshirt_base/'+ cores[i]['codigo'] + '.jpg';
 			break;

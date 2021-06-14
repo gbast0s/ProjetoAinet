@@ -77,9 +77,9 @@
 							<div class="preco">
 								<div class="quantidade">
 									<h3>Quantidade </h3>
-										<button type="button" class="o" id="botao" onclick="decrementar()">-</button>
+									<button type="button" class="o" id="botao" onclick="decrementar()">-</button>
 									<input type="text" name="quantidade" id="quantidade" value="1" required>
-										<button  class="o" type="button" id="botao" onclick="incrementar()">+</button>
+									<button  class="o" type="button" id="botao" onclick="incrementar()">+</button>
 								</div>
 								<div class="valor">
 									<h3>Preço Base</h3>
@@ -104,13 +104,6 @@
 							<div class="add-cart">
 								<button type="submit">Adicionar ao carrinho</button>
 							</div>
-<p>
-	<form action="{{ route('carrinho.destroy') }}" method="POST">
-		@csrf
-		@method("DELETE")
-		<input type="submit" value="Apagar carrinho">
-	</form>
-</p>
 						</div>
 					</div>
             	</form>

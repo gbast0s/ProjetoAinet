@@ -222,6 +222,8 @@
                                                 @endif
                                             </tr>
                                             @endforeach
+                                        @else
+                                            <tr>Não realizou encomendas</tr>
                                         @endif
                                     </tbody>
                                 </table>
