@@ -32,82 +32,81 @@
 						<!--/slider-->
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<div class="data">
-						<h1>Estampa: {{$estampa->nome}}</h1><br>
-						@if($estampa->descricao)
-							<h5>Descrição: {{$estampa->descricao}}</h5> 
-						@endif
-						<a>Selecione as opções abaixo apresentadas para configurar a t-shirt.</a>
-						<h3>Tamanho</h3>
-						<form class="tamanho">
-							<label>
-								<input type="radio" name="tam">
-								<span class="checkmark">XS</span>
-							</label>
-							<label>
-								<input type="radio" name="tam">
-								<span class="checkmark">S</span>
-							</label>
-							<label>
-								<input type="radio" name="tam">
-								<span class="checkmark">M</span>
-							</label>
-							<label>
-								<input type="radio" name="tam">
-								<span class="checkmark">L</span>
-							</label>
-							<label>
-								<input type="radio" name="tam">
-								<span class="checkmark">XL</span>
-							</label>
-						</form>
-						<h3>Cor</h3>
-							<form class="cor">
-								<div class="linha2-cores">
-									<select class="select-dropdown" id="mySelect" name="cor" onchange="mudar_tshirt()">
-									@foreach($cores as $cor)
-											<option name="cor" value="{{$cor->nome}}">{{$cor->nome}}</option>
-									@endforeach	
-									</select>										
-								</div>	
-							</form>
-						<div class="preco">
-							<div class="quantidade">
-								<h3>Quantidade </h3>
-								<div class="o">
-									<button id="botao" onclick="decrementar()">-</button>
+				<form method="POST" action="{{route('carrinho.store_compra', $estampa)}}" class="form-group" enctype="multipart/form-data">
+					@csrf
+					<div class="col-sm-6">
+						<div class="data">
+							<h1>Estampa: {{$estampa->nome}}</h1><br>
+							@if($estampa->descricao)
+								<h5>Descrição: {{$estampa->descricao}}</h5> 
+							@endif
+							<a>Selecione as opções abaixo apresentadas para configurar a t-shirt.</a>
+							<h3>Tamanho</h3>
+							<div class="tamanho">
+								<label>
+									<input type="radio" value="XS" name="tam" required>
+									<span class="checkmark">XS</span>
+								</label>
+								<label>
+									<input type="radio" value="S" name="tam">
+									<span class="checkmark">S</span>
+								</label>
+								<label>
+									<input type="radio" value="M" name="tam">
+									<span class="checkmark">M</span>
+								</label>
+								<label>
+									<input type="radio" value="L" name="tam">
+									<span class="checkmark">L</span>
+								</label>
+								<label>
+									<input type="radio" value="XL" name="tam">
+									<span class="checkmark">XL</span>
+								</label>
+							</div>
+							<h3>Cor</h3>
+								<form class="cor">
+									<div class="linha2-cores">
+										<select class="select-dropdown" id="mySelect" name="cor" onchange="mudar_tshirt()" required>
+										@foreach($cores as $cor)
+												<option name="cor" value="{{$cor->codigo}}">{{$cor->nome}}</option>
+										@endforeach	
+										</select>										
+									</div>	
+								</form>
+							<div class="preco">
+								<div class="quantidade">
+									<h3>Quantidade </h3>
+										<button type="button" class="o" id="botao" onclick="decrementar()">-</button>
+									<input type="text" name="quantidade" id="quantidade" value="1" required>
+										<button  class="o" type="button" id="botao" onclick="incrementar()">+</button>
 								</div>
-								<input type="text" name="quantidade" id="quantidade" value="1">
-								<div class="o">
-									<button id="botao" onclick="incrementar()">+</button>
+								<div class="valor">
+									<h3>Preço Base</h3>
+									@if($estampa->cliente_id == null)
+									<h4>{{$preco->preco_un_catalogo}} €</h4>
+									@else
+									<h4>{{$preco->preco_un_proprio}} €</h4>
+									@endif
 								</div>
-							</div>
-							<div class="valor">
-								<h3>Preço Base</h3>
-								@if($estampa->cliente_id == null)
-								<h4>{{$preco->preco_un_catalogo}} €</h4>
-								@else
-								<h4>{{$preco->preco_un_proprio}} €</h4>
-								@endif
-							</div>
-							<div class="desconto">
-								@if($estampa->cliente_id == null)
-									<a>Na compra de {{$preco->quantidade_desconto}} T-shirts o preço de cada fica a: {{$preco->preco_un_catalogo_desconto}} €</a>
-								@else
-									<a>Na compra de {{$preco->quantidade_desconto}} T-shirts o preço de cada fica a: {{$preco->preco_un_proprio_desconto}} €</a>
-								@endif
-							</div>
+								<div class="desconto">
+									@if($estampa->cliente_id == null)
+										<a>Na compra de {{$preco->quantidade_desconto}} T-shirts o preço de cada fica a: {{$preco->preco_un_catalogo_desconto}} €</a>
+									@else
+										<a>Na compra de {{$preco->quantidade_desconto}} T-shirts o preço de cada fica a: {{$preco->preco_un_proprio_desconto}} €</a>
+									@endif
+								</div>
 
-						</div>
-						<div class="entrega-prevista">
-							<a>Entrega prevista em 3 dias úteis</a>
-						</div>
-						<div class="add-cart">
-							<button>Adicionar ao carrinho</button>
+							</div>
+							<div class="entrega-prevista">
+								<a>Entrega prevista em 3 dias úteis</a>
+							</div>
+							<div class="add-cart">
+								<button type="submit">Adicionar ao carrinho</button>
+							</div>
 						</div>
 					</div>
-				</div>
+            	</form>
 			</div>
 		</div>
 	</div>

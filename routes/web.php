@@ -22,6 +22,7 @@ Route::get('/', [EstampasController::class, 'index'])->name('home');
 Route::get('catalogo', [EstampasController::class, 'catalogo'])->name('catalogo');
 Route::get('/catalogo/{categoria}', [EstampasController::class, 'categoria'])->name('categoria');
 Route::get('/carrinho', [CompraController::class, 'carrinho'])->name('carrinho');
+Route::post('/carrinho/{estampa}', [CompraController::class, 'store_compra'])->name('carrinho.store_compra');
 
 Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(function () {
 
