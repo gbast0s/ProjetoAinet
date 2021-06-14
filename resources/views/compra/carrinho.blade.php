@@ -26,7 +26,7 @@
 								@if($pedido['estampa']->cliente_id)
 									<img src="{{ route('catalogo.estampa.privada', $pedido['estampa']) }}" class="estampa_tshirt"  alt="" />
 								@else
-									<img src="/storage/tshirt_base/{{$pedido['cor']}}.jpg" alt="" />
+									<img src="/storage/tshirt_base/{{$pedido['cor']->codigo}}.jpg" alt="" />
 									<img src="{{$pedido['estampa']->imagem_url ? asset('storage/estampas/' . $pedido['estampa']->imagem_url) : asset('img/default_img.png') }}" class="estampa_tshirt"  alt=""/>
 								@endif
 							</td>
