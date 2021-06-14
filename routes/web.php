@@ -23,6 +23,7 @@ Route::get('catalogo', [EstampasController::class, 'catalogo'])->name('catalogo'
 Route::get('/catalogo/{categoria}', [EstampasController::class, 'categoria'])->name('categoria');
 Route::get('/carrinho', [CompraController::class, 'carrinho'])->name('carrinho');
 Route::post('/carrinho/{estampa}', [CompraController::class, 'store_compra'])->name('carrinho.store_compra');
+Route::delete('carrinho', [CompraController::class, 'destroy'])->name('carrinho.destroy');
 
 Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(function () {
 

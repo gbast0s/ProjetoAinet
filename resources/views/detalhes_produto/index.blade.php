@@ -32,7 +32,7 @@
 						<!--/slider-->
 					</div>
 				</div>
-				<form method="POST" action="{{route('carrinho.store_compra', $estampa)}}" class="form-group" enctype="multipart/form-data">
+				<form method="POST" action="{{route('carrinho.store_compra', ['estampa' => $estampa])}}" class="form-group" enctype="multipart/form-data">
 					@csrf
 					<div class="col-sm-6">
 						<div class="data">
@@ -104,6 +104,13 @@
 							<div class="add-cart">
 								<button type="submit">Adicionar ao carrinho</button>
 							</div>
+<p>
+	<form action="{{ route('carrinho.destroy') }}" method="POST">
+		@csrf
+		@method("DELETE")
+		<input type="submit" value="Apagar carrinho">
+	</form>
+</p>
 						</div>
 					</div>
             	</form>
