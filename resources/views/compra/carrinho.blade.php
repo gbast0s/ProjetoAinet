@@ -103,8 +103,7 @@
                                     <button class="btn btn-default update" type="submit" value="">Apagar carrinho</button>
                                 </form>
                                 <a class="btn btn-default update" href="{{ route('carrinho') }}">Atualizar</a>
-                                <a class="btn btn-default check_out" href="{{ route('usuario.checkout') }}">Check Out</a>
-                                
+                                <a class="btn btn-default check_out" href="{{ route('usuario.checkout') }}">Check Out</a>                
                             </div>
                         </div>
                     </div>

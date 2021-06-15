@@ -115,7 +115,7 @@
           @endif
 
           <!-- Divider -->
-          @if(Auth::user())
+          @if(Auth::user() && !Auth::user()->isCliente())
             <hr class="sidebar-divider d-none d-md-block">
           @endif
 
@@ -164,7 +164,7 @@
                       Perfil
                       </a>
                       <div class="dropdown-divider"></div>
-                    @else
+                    @elseif(Auth::user()->tipo == 'F')
                       <a class="dropdown-item" href="{{ route('admin.alterarpass', auth()->user()) }}">
                       <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                       Alterar Password

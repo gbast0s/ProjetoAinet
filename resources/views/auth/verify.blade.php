@@ -1,4 +1,5 @@
 @extends('layout_admin')
+@section('titulo', 'MagicShirts - Verificação Email')
 @section('content')
 <title>MagicShirts - Verificação Email</title>
 <div class="container">
