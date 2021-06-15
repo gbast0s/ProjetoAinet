@@ -20,6 +20,8 @@
             <label>Tamanho: {{$tshirt->tamanho}}<label>
             @if($tshirt->cor)
                 <label>Cor: {{$tshirt->cor->nome}}<label>
+            @else
+                <label>Cor: Inexistente<label>
             @endif
             <label>Quantidade: {{$tshirt->quantidade}}<label>
             <img src="{{ route('admin.estampa.privada', $tshirt) }}" class="estampa_tshirt"  alt="" />
