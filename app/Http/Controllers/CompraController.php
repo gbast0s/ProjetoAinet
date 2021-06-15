@@ -180,7 +180,7 @@ class CompraController extends Controller
         $newEncomenda->cliente_id = $cliente->id;
         $newEncomenda->data = date('Y-m-d');
         $newEncomenda->preco_total = $request->total_encomenda;
-        //$newEncomenda->notas = "asd";
+        $newEncomenda->notas = $request->notas;
         $newEncomenda->nif = $cliente->nif;
         $newEncomenda->endereco = $cliente->endereco;
         $newEncomenda->tipo_pagamento = $cliente->tipo_pagamento;
@@ -210,7 +210,7 @@ class CompraController extends Controller
         $request->session()->forget('carrinho');
 
         return redirect()->route('home')
-            ->with('alert-msg', "A sua encomenda foi efectuada")
+            ->with('alert-msg', "A sua encomenda #". $newEncomenda->id ." foi efectuada")
             ->with('alert-type', 'success');
     }
 }

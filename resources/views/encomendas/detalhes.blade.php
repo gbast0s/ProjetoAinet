@@ -5,6 +5,11 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Detalhes da encomenda #{{ $encomenda->id }}</h1>
         </div>
+        @if($encomenda->notas)
+            <h5 class="mb-0 text-gray-800">Notas Encomenda: </h5><a>{{$encomenda->notas}}</a>
+        @else
+            <h5 class="mb-0 text-gray-800">Notas Encomenda:</h5><a>Nada a visar</a>
+        @endif
         <div class="dados-encomendas-1">
             <div class="dados-cliente-encomendas">
                 <h3>Detalhes de cliente</h3>
