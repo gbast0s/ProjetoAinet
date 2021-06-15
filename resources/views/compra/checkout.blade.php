@@ -1,44 +1,57 @@
 @extends('partials.header_footer')
+@section('titulo', 'MagicShirts - Checkout')
 @section('content')
-<title>MagicShirts - Checkout</title>
-	<section id="cart_items">
-		<div class="container">
+<form action="{{ route('usuario.carrinho.store_compra', ['cliente' => $cliente, 'total_encomenda' => $custoTotal] ) }}" method="POST">
+    @csrf
+    <section id="cart_items">
+        <div class="container">
             <div>
                 <h2 class="heading">Detalhes de envio</h2>
             </div>
             @if ($cliente->nif)
                 <div class="config-atuais">
                     <h3 class="titulo">Dados atuais da conta</h3>
-                    <div class="caixa-dados">
-                        <div class="caixa-dados-esq">
-                            <p>NIF do cliente:</p>
+                    <div class="g1">
+                        <div class="g1-1">
+                            <div class="caixa-dados">
+                                <div class="caixa-dados-esq">
+                                    <p>NIF do cliente:</p>
+                                </div>
+                                <div class="caixa-dados-dir">
+                                    <p>{{$cliente->nif}}</p>
+                                </div>
+                            </div>
+                            <div class="caixa-dados">
+                                <div class="caixa-dados-esq">
+                                    <p>Endereço:</p>
+                                </div>
+                                <div class="caixa-dados-dir">
+                                    <p>{{$cliente->endereco}}</p>
+                                </div>
+                            </div>
+                            <div class="caixa-dados">
+                                <div class="caixa-dados-esq">
+                                    <p>Tipo de pagamento:</p>
+                                </div>
+                                <div class="caixa-dados-dir">
+                                    <p>{{ $cliente->tipo_pagamento }}</p>
+                                </div>
+                            </div>
+                            <div class="caixa-dados">
+                                <div class="caixa-dados-esq">
+                                    <p>Referência de pagamento:</p>
+                                </div>
+                                <div class="caixa-dados-dir">
+                                    <p>{{ $cliente->ref_pagamento }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="caixa-dados-dir">
-                            <p>{{$cliente->nif}}</p>
-                        </div>
-                    </div>
-                    <div class="caixa-dados">
-                        <div class="caixa-dados-esq">
-                            <p>Endereço:</p>
-                        </div>
-                        <div class="caixa-dados-dir">
-                            <p>{{$cliente->endereco}}</p>
-                        </div>
-                    </div>
-                    <div class="caixa-dados">
-                        <div class="caixa-dados-esq">
-                            <p>Tipo de pagamento:</p>
-                        </div>
-                        <div class="caixa-dados-dir">
-                            <p>{{ $cliente->tipo_pagamento }}</p>
-                        </div>
-                    </div>
-                    <div class="caixa-dados">
-                        <div class="caixa-dados-esq">
-                            <p>Referência de pagamento:</p>
-                        </div>
-                        <div class="caixa-dados-dir">
-                            <p>{{ $cliente->ref_pagamento }}</p>
+
+                        <div class="g1-2">
+                            <div class="caixa-dados-notas">
+                                <p>Notas:</p>
+                                <textarea type="text" cols="50"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,10 +65,10 @@
                 </div>
             @endif
 
-			<div class="review-payment">
-				<h2>Revisão e Pagamento</h2>
-			</div>
-			<div class="tabela-compras-div">
+            <div class="review-payment">
+                <h2>Revisão e Pagamento</h2>
+            </div>
+            <div class="tabela-compras-div">
                 @if ($carrinho)
                     <table class="tabela-compras">
                         <thead>
@@ -131,7 +144,7 @@
                         <a>Clique </a><a href="{{ route('catalogo') }}">aqui</a><a> para começar a comprar.</a>
                     </div>
                 @endif
-			</div>
+            </div>
             @if ($carrinho)
                 <section class="do_action">
                     <div class="container">
@@ -152,10 +165,7 @@
                                             <button class="btn btn-default update" type="submit" value="">Apagar carrinho</button>
                                         </form>
                                         <a class="btn btn-default update" href="{{ route('usuario.checkout') }}">Atualizar</a>
-                                        <form action="{{ route('usuario.carrinho.store_compra', ['cliente' => $cliente, 'total_encomenda' => $custoTotal] ) }}" method="POST">
-                                            @csrf
-                                            <button class="btn btn-default update" type="submit" value="" {{ $cliente->nif ? '' : 'disabled' }}>Confirmar carrinho</button>
-                                        </form>
+                                        <button class="btn btn-default update" type="submit" value="" {{ $cliente->nif ? '' : 'disabled' }}>Confirmar carrinho</button>
                                     </div>
                                 </div>
                             </div>
@@ -163,6 +173,7 @@
                     </div>
                 </section><!--/#do_action-->
             @endif
-		</div>
-	</section> <!--/#cart_items-->
+        </div>
+    </section> <!--/#cart_items-->
+</form>
 @endsection
