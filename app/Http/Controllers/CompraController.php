@@ -6,6 +6,8 @@ use App\Models\Estampa;
 use App\Models\Preco;
 use Illuminate\Http\Request;
 use App\Models\Cores;
+use App\Models\Clientes;
+use Illuminate\Support\Facades\Auth;
 
 class CompraController extends Controller
 {
@@ -26,6 +28,8 @@ class CompraController extends Controller
 
     public function checkout(Request $request)
     {
+        $cliente = Clientes::where('id', Auth::user()->id)->first();
+
         $carrinho = $request->session()->get('carrinho', []);
 
         $custo_total=0;
@@ -36,7 +40,8 @@ class CompraController extends Controller
 
         return view('compra.checkout')
             ->with('carrinho', session('carrinho') ?? [])
-            ->withCustoTotal($custo_total);
+            ->withCustoTotal($custo_total)
+            ->withCliente($cliente);
     }
 
     public function store_compra(Request $request, Estampa $estampa)
