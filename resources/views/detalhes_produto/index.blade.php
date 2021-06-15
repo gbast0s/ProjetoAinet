@@ -32,7 +32,7 @@
 						<!--/slider-->
 					</div>
 				</div>
-				<form method="POST" action="{{route('carrinho.store_compra', ['estampa' => $estampa])}}" class="form-group" enctype="multipart/form-data">
+				<form method="POST" action="{{route('carrinho.store_pedido', ['estampa' => $estampa])}}" class="form-group" enctype="multipart/form-data">
 					@csrf
 					<div class="col-sm-6">
 						<div class="data">

@@ -22,7 +22,7 @@ Route::get('/', [EstampasController::class, 'index'])->name('home');
 Route::get('catalogo', [EstampasController::class, 'catalogo'])->name('catalogo');
 Route::get('/catalogo/{categoria}', [EstampasController::class, 'categoria'])->name('categoria');
 Route::get('/carrinho', [CompraController::class, 'carrinho'])->name('carrinho');
-Route::post('/carrinho/{estampa}', [CompraController::class, 'store_compra'])->name('carrinho.store_compra');
+Route::post('/carrinho/{estampa}', [CompraController::class, 'store_pedido'])->name('carrinho.store_pedido');
 Route::delete('carrinho/destroy', [CompraController::class, 'destroy'])->name('carrinho.destroy');
 Route::delete('carrinho', [CompraController::class, 'destroy_pedido'])->name('carrinho.destroy_pedido');
 Route::put('carrinho/update', [CompraController::class, 'update_pedido'])->name('carrinho.update_pedido');
@@ -40,6 +40,7 @@ Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(fun
 
         Route::get('checkout', [CompraController::class, 'checkout'])->name('checkout') 
             ->middleware('verified'); 
+        Route::post('carrinho', [CompraController::class, 'store_compra'])->name('carrinho.store_compra');
     });                                                  
 
 });

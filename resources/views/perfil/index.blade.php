@@ -207,6 +207,10 @@
                                                     <td>Fechada</td>
                                                 @elseif ($enc->estado == "anulada")
                                                     <td>Anulada</td>
+                                                @elseif ($enc->estado == "pendente")
+                                                    <td>Pendente</td>
+                                                @elseif ($enc->estado == "paga")
+                                                    <td>Paga</td>
                                                 @endif
                                                 <td>{{ $enc->data }}</td>
                                                 <td>{{ $enc->preco_total }}</td>

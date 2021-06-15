@@ -7,6 +7,8 @@ use App\Models\Preco;
 use Illuminate\Http\Request;
 use App\Models\Cores;
 use App\Models\Clientes;
+use App\Models\Encomendas;
+use App\Models\Tshirts;
 use Illuminate\Support\Facades\Auth;
 
 class CompraController extends Controller
@@ -44,7 +46,7 @@ class CompraController extends Controller
             ->withCliente($cliente);
     }
 
-    public function store_compra(Request $request, Estampa $estampa)
+    public function store_pedido(Request $request, Estampa $estampa)
     {
 
         $preco = Preco::first();
@@ -60,11 +62,13 @@ class CompraController extends Controller
 
         if($estampa->cliente_id)
         {
+            $preco_un = $request->quantidade < 5 ? $preco->preco_un_proprio  : $preco->preco_un_proprio_desconto;
             $preco = $request->quantidade < 5 ? ($preco->preco_un_proprio * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 )  : ($preco->preco_un_proprio_desconto * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 );
 
         }
         else
         {
+            $preco_un = $request->quantidade < 5 ? $preco->preco_un_catalogo  : $preco->preco_un_catalogo_desconto;
             $preco = $request->quantidade < 5 ? ($preco->preco_un_catalogo * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 ) : ($preco->preco_un_catalogo_desconto * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 );
         }
 
@@ -76,6 +80,7 @@ class CompraController extends Controller
             'qtd' => $qtd,
             'tam' => $request->tam,
             'preco' => $preco,
+            'preco_un' => $preco_un,
         ];
 
         $request->session()->put('carrinho', $carrinho);
@@ -139,20 +144,73 @@ class CompraController extends Controller
 
             if($carrinho[$pedido_id]['estampa']->cliente_id)
             {
+                $preco_un = $qtd < 5 ? $preco->preco_un_proprio  : $preco->preco_un_proprio_desconto;
                 $preco = $qtd < 5 ? ($preco->preco_un_proprio * $qtd) : ($preco->preco_un_proprio_desconto * $qtd);
-
             }
             else
             {
+                $preco_un = $qtd < 5 ? $preco->preco_un_catalogo  : $preco->preco_un_catalogo_desconto;
                 $preco = $qtd < 5 ? ($preco->preco_un_catalogo * $qtd) : ($preco->preco_un_catalogo_desconto * $qtd);
             }
 
             $carrinho[$pedido_id]['qtd'] = $qtd;
             $carrinho[$pedido_id]['preco'] = $preco;
+            $carrinho[$pedido_id]['preco_un'] = $preco_un;
         }
+
         $request->session()->put('carrinho', $carrinho);
         return back()
             ->with('alert-msg', $msg)
+            ->with('alert-type', 'success');
+    }
+
+    public function store_compra(Request $request)
+    {
+
+        $cliente = Clientes::findOrFail($request->cliente);
+
+        if(!$cliente->nif){
+            return back()
+            ->with('alert-msg', 'Por favor atualize os seus dados de envio!')
+            ->with('alert-type', 'danger');
+        }
+
+        $newEncomenda = new Encomendas();
+        $newEncomenda->estado = "pendente";
+        $newEncomenda->cliente_id = $cliente->id;
+        $newEncomenda->data = date('Y-m-d');
+        $newEncomenda->preco_total = $request->total_encomenda;
+        //$newEncomenda->notas = "asd";
+        $newEncomenda->nif = $cliente->nif;
+        $newEncomenda->endereco = $cliente->endereco;
+        $newEncomenda->tipo_pagamento = $cliente->tipo_pagamento;
+        $newEncomenda->ref_pagamento = $cliente->ref_pagamento;  
+
+        $newEncomenda->save();
+
+        $carrinho = $request->session()->get('carrinho', []);
+
+        foreach($carrinho as $pedido)
+        {
+            $newTshirts = new Tshirts();
+
+            $newTshirts->encomenda_id = $newEncomenda->id;
+            $newTshirts->estampa_id = $pedido['estampa']->id;
+            $newTshirts->cor_codigo = $pedido['cor']->codigo;
+            $newTshirts->tamanho = $pedido['tam'];
+            $newTshirts->quantidade = $pedido['qtd'];
+            $newTshirts->preco_un = $pedido['preco_un'];
+            $newTshirts->subtotal = $pedido['preco'];
+
+            $newTshirts->save();
+        }
+
+        EmailController::enviar_email_encomenda_pendete($newEncomenda);
+        
+        $request->session()->forget('carrinho');
+
+        return redirect()->route('home')
+            ->with('alert-msg', "A sua encomenda foi efectuada")
             ->with('alert-type', 'success');
     }
 }
