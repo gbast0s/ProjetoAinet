@@ -14,17 +14,17 @@
                     <div class="barra">
 						<div class="mainmenu">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="#ver-estampagens">As suas Estampagens</a></li>
-								<li><a href="#adicionar-estampagens">Adicionar Estampagem</a></li>
+								<li><a href="#ver-estampagens">As minhas Estampas</a></li>
+								<li><a href="#adicionar-estampagens">Adicionar nova Estampa</a></li>
 							</ul>
 						</div>
 					</div>
                     <div class="list">
-                        <h3 id="ver-estampagens" class="titulo">As suas Estampas</h3>
+                        <h3 id="ver-estampagens" class="titulo">As minhas Estampas</h3>
                         <div class="group-1">
-                            <a>Aqui, podes observar todas as tuas estampagens.</a>
+                            <a>Aqui, podes observar todas as tuas estampas.</a>
                             <p>Cliente: {{Auth::user()->name}}</p>
-                            <p>Lista das estampagens adicionadas:</p>
+                            <p>Lista das estampas adicionadas:</p>
                             @if($estampasPrivada)
                                 <div class="imagens-privadas">
                                     @foreach($estampasPrivada as $estampaP)
