@@ -49,7 +49,7 @@ class CompraController extends Controller
 
         $preco = Preco::first();
         $cor = Cores::where('codigo', $request->cor)->first();
-       
+
         if($request->quantidade < 0)
         {
             $request->quantidade = 1;
@@ -110,15 +110,15 @@ class CompraController extends Controller
         }
         return back()
             ->with('alert-msg', 'O seu pedido  [  " Estampa : ' .$estampa_nome." | Cor: ".$cor . ' " ]  já não existia no carrinho!')
-            ->with('alert-type', 'warning'); 
-        
+            ->with('alert-type', 'warning');
+
     }
 
     public function update_pedido(Request $request)
     {
         $pedido_id = $request->pedido_id;
         $preco = Preco::first();
-        
+
         $carrinho = $request->session()->get('carrinho', []);
 
         $estampa_nome = $carrinho[$pedido_id]['estampa']->nome;
@@ -139,16 +139,16 @@ class CompraController extends Controller
 
             if($carrinho[$pedido_id]['estampa']->cliente_id)
             {
-                $preco = $request->quantidade < 5 ? ($preco->preco_un_proprio * $qtd) : ($preco->preco_un_proprio_desconto * $qtd);
-    
+                $preco = $qtd < 5 ? ($preco->preco_un_proprio * $qtd) : ($preco->preco_un_proprio_desconto * $qtd);
+
             }
             else
             {
-                $preco = $request->quantidade < 5 ? ($preco->preco_un_catalogo * $qtd) : ($preco->preco_un_catalogo_desconto * $qtd);
+                $preco = $qtd < 5 ? ($preco->preco_un_catalogo * $qtd) : ($preco->preco_un_catalogo_desconto * $qtd);
             }
 
-            $carrinho[$pedido_id]['qtd'] = $qtd;    
-            $carrinho[$pedido_id]['preco'] = $preco;   
+            $carrinho[$pedido_id]['qtd'] = $qtd;
+            $carrinho[$pedido_id]['preco'] = $preco;
         }
         $request->session()->put('carrinho', $carrinho);
         return back()

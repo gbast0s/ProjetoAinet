@@ -1361,7 +1361,7 @@ html {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center; 
+    align-items: center;
 	justify-content: center;
     border-radius: 10px;
     padding: 20px;
@@ -1789,7 +1789,7 @@ button .null {
     flex-direction: row;
     align-items: center;
 }
-  
+
 .o {
     display: flex;
     align-items: center;
@@ -1801,7 +1801,7 @@ button .null {
     margin: 10px;
     font-weight: 900;
 }
-  
+
 .o:hover , .o:hover button{
     background-color: rgb(190, 190, 190);
     transition: 0.5s ease;
@@ -1853,7 +1853,7 @@ button .null {
     justify-content: center;
 }
 
-.nao-existe-produto a:nth-child(2), 
+.nao-existe-produto a:nth-child(2),
 .nao-existe-produto a:nth-child(4),
 .nao-existe-produto p {
     margin: 20px 0;
@@ -1882,9 +1882,63 @@ button .null {
     border: 1px solid #fe980f;
 }
 
-.botoes-carrinho2 a:hover, .botoes-carrinho2 button:hover{
+.botoes-carrinho2 a:hover, .botoes-carrinho2 button:hover {
     box-shadow: 2px 2px 5px #666663;
     transition: 0.5s ease;
+}
+
+/***************************
+ ******* Checkout CSS ******
+ ***************************/
+
+.caixa-dados:nth-child(2) {
+    border-top: 1px solid #fe960f;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.caixa-dados {
+    display: flex;
+    flex-direction: row;
+    border-left: 1px solid #fe960f;
+    border-right: 1px solid #fe960f;
+    width: 50%;
+}
+
+.caixa-dados:last-child {
+    border-bottom: 1px solid #fe960f;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.caixa-dados-esq, .caixa-dados-dir {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.caixa-dados-esq p {
+    font-weight: bold;
+}
+
+.caixa-dados p {
+    margin: 0;
+}
+
+.botoes-carrinho3 a {
+    margin: 20px 0;
+    border: 1px solid #fe960f;
+    transition-duration: 0.5s;
+    transition: all 0.5s ease;
+}
+
+.botoes-carrinho3 a:hover {
+    box-shadow: 2px 2px 5px #666663;
+    transition: 0.5s ease;
+    border: 1px solid #fe960f;
 }
 
 /*************************
@@ -1974,7 +2028,7 @@ button .null {
   margin-right: 20px;
 }
 
-.social-networks ul li:last-child{
+.social-networks ul li:last-child {
   margin-right: 0;
 }
 
