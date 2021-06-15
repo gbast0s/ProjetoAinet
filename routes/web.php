@@ -25,18 +25,23 @@ Route::get('/carrinho', [CompraController::class, 'carrinho'])->name('carrinho')
 Route::post('/carrinho/{estampa}', [CompraController::class, 'store_compra'])->name('carrinho.store_compra');
 Route::delete('carrinho/destroy', [CompraController::class, 'destroy'])->name('carrinho.destroy');
 Route::delete('carrinho', [CompraController::class, 'destroy_pedido'])->name('carrinho.destroy_pedido');
+Route::put('carrinho/update', [CompraController::class, 'update_pedido'])->name('carrinho.update_pedido');
+
 
 Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(function () {
 
     Route::get('estampa_personalizada', [EstampasController::class, 'estampa_personalizada'])->name('estampa_personalizada');
     Route::post('estampa_personalizada', [EstampasController::class, 'store_estampa_privada'])->name('estampa.store');
     Route::get('perfil', [ClienteController::class, 'perfil'])->name('perfil');
-
-    Route::get('checkout', [CompraController::class, 'checkout'])->name('checkout')
-        ->middleware('verified');
-
     Route::put('perfil/{cliente}', [ClienteController::class, 'updateClientesInfo'])->name('clientes.update');
     Route::delete('perfil/{cliente}/foto', [ClienteController::class, 'destroy_foto'])->name('clientes.foto.destroy');
+
+    Route::middleware(['carrinhoEmpty'])->group(function() {
+
+        Route::get('checkout', [CompraController::class, 'checkout'])->name('checkout') 
+            ->middleware('verified'); 
+    });                                                  
+
 });
 
 

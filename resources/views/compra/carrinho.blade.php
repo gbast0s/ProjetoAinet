@@ -34,7 +34,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <h4>{{$pedido['nome_estampa']}}</h4>
+                                    <h4>{{$pedido['estampa']->nome}}</h4>
                                 </td>
                                 <td>
                                     <p>{{$pedido['tam']}}</p>
@@ -44,14 +44,14 @@
                                 </td>
                                 <td>
                                     <div class="quantidade">
-                                        <form action="" method="POST">
+                                        <form action="{{ route('carrinho.update_pedido', ['pedido_id' => $pedido['id']]) }}" method="POST">
                                             @csrf
                                             @method('put')
                                             <input type="hidden" name="quantidade" value="-1">
                                             <button type="submit" class="o" onclick="decrementar()"> - </button>
                                         </form>
                                         <label>{{$pedido['qtd']}}</label>
-                                        <form action="" method="POST">
+                                        <form action="{{ route('carrinho.update_pedido', ['pedido_id' => $pedido['id']]) }}" method="POST">
                                             @csrf
                                             @method('put')
                                             <input type="hidden" name="quantidade" value="1">
@@ -92,10 +92,9 @@
                     <div class="col-sm-6">
                         <div class="total_area">
                             <ul>
-                                <li>Cart Sub Total <span>$59</span></li>
-                                <li>Eco Tax <span>$2</span></li>
-                                <li>Shipping Cost <span>Free</span></li>
-                                <li>Total <span>$61</span></li>
+                                <li>Sub Total Carrinho <span>{{ $custoTotal }} €</span></li>
+                                <li>Custo de Envio <span>Grátis</span></li>
+                                <li>Total <span>{{ $custoTotal }} €</span></li>
                             </ul>
                             <div class="botoes-carrinho2">
                                 <form action="{{ route('carrinho.destroy') }}" method="POST">

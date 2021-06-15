@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'staff' => \App\Http\Middleware\IsStaff::class,
         'cliente' => \App\Http\Middleware\IsCliente::class,
+        'carrinhoEmpty' => \App\Http\Middleware\CarrinhoEmpty::class,
         'estampaValida' => \App\Http\Middleware\IsEstampaValida::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
