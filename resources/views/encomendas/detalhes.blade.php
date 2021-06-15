@@ -47,9 +47,11 @@
             </div>
         </div>
         <div class="botoes-detalhes">
-            <div class="form-group text-right">
-                <a href="{{route('admin.encomendas') }}" class="btn btn-outline-dark">Fatura</a>
-            </div>
+            @if(Auth::user()->tipo == 'A' && $encomenda->recibo_url)
+                <div class="form-group text-right">
+                    <a href="{{route('admin.encomendas') }}" class="btn btn-outline-dark">Fatura</a>
+                </div>
+            @endif
             <div class="form-group text-right">
                 <a href="{{route('admin.encomendas') }}" class="btn btn-info">Voltar atrás</a>
             </div>
