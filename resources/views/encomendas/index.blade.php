@@ -39,7 +39,7 @@
                 <th>Data</th>
                 <th>Preço Total</th>
                 <th>Notas</th>
-                <th>Nif</th>
+                <th>NIF</th>
             </tr>
         </thead>
         <tbody>

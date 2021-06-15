@@ -1,47 +1,58 @@
 @extends('layout_admin')
 @section('titulo', 'MagicShirts - Encomendas' )
 @section('content')
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"></h1>
-</div>
-<div class="row mb-3">
-    <div class="col-9">
+    <div class="detalhes-encomendas">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Detalhes da encomenda #{{ $encomenda->id }}</h1>
+        </div>
+        <div class="dados-encomendas-1">
+            <div class="dados-cliente-encomendas">
+                <h3>Detalhes de cliente</h3>
+                @if($encomenda->cliente)
+                    <a>Nome de cliente:</a><a>{{ $encomenda->cliente->user->name }}</a>
+                @else
+                    <a>Nome de cliente:</a><a>Inacessivel</a>
+                @endif
+                <a>Endereço:</a><a>{{ $encomenda->endereco }}</a>
+            </div>
+            <div class="dados-pagamento-encomendas">
+                <h3>Detalhes de pagamento</h3>
+                <a>Tipo Pagamento:</a><a>{{$encomenda->tipo_pagamento}}</a>
+                <a>Ref Pagamento:</a><a>{{$encomenda->ref_pagamento}}</a>
+                <a>Custo total:</a><a>{{$encomenda->preco_total}} €</a>
+            </div>
+        </div>
+        <div class="lista-encomendas-feitas">
+            <h3>Produtos encomendados</h3>
+            <div class="produtos-tabela">
+                @foreach($tshirts as $tshirt)
+                    <div class="produto-unitario">
+                        <a>Imagem da estampa:</a>
+                        @if($tshirt->estampa && $tshirt->estampa->cliente_id)
+                            <a href="{{ route('admin.estampa.privada', $tshirt) }}" target="_blank"><img src="{{ route('admin.estampa.privada', $tshirt) }}" alt="" /></a>
+                        @elseif($tshirt->estampa)
+                            <a href=" {{ asset('storage/estampas/' . $tshirt->estampa->imagem_url) }}" target="_blank"><img src="{{$tshirt->estampa->imagem_url ? asset('storage/estampas/' . $tshirt->estampa->imagem_url) : asset('img/default_img.png') }}"  alt=""/></a>
+                        @else
+                            <a>Inacessivel</a>
+                        @endif
+                        <a>Tamanho:</a><a>{{$tshirt->tamanho}}</a>
+                        @if($tshirt->cor)
+                            <a>Cor:</a><a>{{$tshirt->cor->nome}}</a>
+                        @else
+                            <a>Cor:</a><a>Inacessivel</a>
+                        @endif
+                        <a>Quantidade:</a><a>{{$tshirt->quantidade}}</a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="botoes-detalhes">
+            <div class="form-group text-right">
+                <a href="{{route('admin.encomendas') }}" class="btn btn-outline-dark">Fatura</a>
+            </div>
+            <div class="form-group text-right">
+                <a href="{{route('admin.encomendas') }}" class="btn btn-info">Voltar atrás</a>
+            </div>
+        </div>
     </div>
-</div>
-    <label>Nome Cliente: {{$encomenda->cliente->user->name}}<label>
-    <label>Endereço: {{$encomenda->endereco}}<label>
-    <label>Tipo Pagamento: {{$encomenda->tipo_pagamento}}<label>
-    <label>Ref Pagamento: {{$encomenda->ref_pagamento}}<label>
-    <label>Custo total: {{$encomenda->preco_total}} €<label>
-    <label>Endereço: {{$encomenda->endereco}}<label>
-
-    @foreach($tshirts as $tshirt) 
-        @if($tshirt->estampa && $tshirt->estampa->cliente_id)
-            <label>Tamanho: {{$tshirt->tamanho}}<label>
-            @if($tshirt->cor)
-                <label>Cor: {{$tshirt->cor->nome}}<label>
-            @else
-                <label>Cor: Inexistente<label>
-            @endif
-            <label>Quantidade: {{$tshirt->quantidade}}<label>
-            <img src="{{ route('admin.estampa.privada', $tshirt) }}" class="estampa_tshirt"  alt="" />
-        @elseif($tshirt->estampa)
-            <label>Tamanho: {{$tshirt->tamanho}}<label>
-            @if($tshirt->cor)
-                <label>Cor: {{$tshirt->cor->nome}}<label>
-            @endif
-            <label>Quantidade: {{$tshirt->quantidade}}<label>
-            <img src="{{$tshirt->estampa->imagem_url ? asset('storage/estampas/' . $tshirt->estampa->imagem_url) : asset('img/default_img.png') }}" class="estampa_tshirt"  alt=""/>
-        @endif
-    @endforeach
-    <div class="form-group text-right">
-            <a href="{{route('admin.encomendas') }}" class="btn btn-info">Voltar atrás</a>
-    </div>
-
-
-    <div class="form-group text-right">
-            <a href="{{route('admin.encomendas') }}" class="btn btn-outline-dark">Fatura</a>
-    </div>
-        
-
 @endsection
