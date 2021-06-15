@@ -24,9 +24,19 @@ class CompraController extends Controller
             ->withCustoTotal($custo_total);
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
-        return view('compra.checkout');
+        $carrinho = $request->session()->get('carrinho', []);
+
+        $custo_total=0;
+
+        foreach($carrinho as $pedido){
+            $custo_total += $pedido['preco'];
+        }
+
+        return view('compra.checkout')
+            ->with('carrinho', session('carrinho') ?? [])
+            ->withCustoTotal($custo_total);
     }
 
     public function store_compra(Request $request, Estampa $estampa)
