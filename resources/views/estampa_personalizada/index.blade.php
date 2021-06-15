@@ -1,6 +1,6 @@
 @extends('partials.header_footer')
+@section('titulo', 'MagicShirts - Estampa Personalizada')
 @section('content')
-<title>MagicShirts - Estampa Personalizada</title>
 <body>
     <div class="custom">
         <div class="container">

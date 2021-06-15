@@ -1,6 +1,6 @@
 @extends('partials.header_footer')
+@section('titulo', 'MagicShirts')
 @section('content')
-	<title>MagicShirts</title>
 	<section id="slider"><!--slider-->
 		<div class="container">
 			<div class="row">

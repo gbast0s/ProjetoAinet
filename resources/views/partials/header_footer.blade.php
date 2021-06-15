@@ -15,6 +15,7 @@
 		<link href="{{ asset('css/animate.cs') }}s" rel="stylesheet">
 		<link href="{{ asset('css/main.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+		<title>@yield('titulo')</title>
 	</head>
 	<!--/head-->
 
