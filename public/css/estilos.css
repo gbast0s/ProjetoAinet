@@ -108,6 +108,14 @@ a.btn.btn-primary.btn-sm {
     width: 150px;
     background-color: #8888888c;
     margin: 5px;
+    transition: all 0.5s ease;
+    border: none;
+}
+
+.detalhes-encomendas img:hover {
+    opacity: 60%;
+    transition: all 0.5s ease;
+    border: 2px solid #4e73df;
 }
 
 .produtos-tabela {
