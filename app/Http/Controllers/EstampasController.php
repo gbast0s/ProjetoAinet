@@ -8,6 +8,8 @@ use App\Models\Estampa;
 use App\Models\Preco;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EstampaPost;
+use App\Models\Tshirts;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -76,10 +78,19 @@ class EstampasController extends Controller
 
     public function getEstampa(Estampa $estampa){
 
-        if ($estampa->imagem_url) {
-            ob_end_clean();
-            return response()->file(storage_path().'/app/estampas_privadas/'.$estampa->imagem_url);
+        try{
+            if ($estampa->imagem_url) {
+                ob_end_clean();
+                return response()->file(storage_path().'/app/estampas_privadas/'.$estampa->imagem_url);
+            }
         }
+        catch(\Throwable $th)
+        {
+            return redirect()->route('home')
+            ->with('alert-msg', 'A estampa que está a tentar aceder não existe')
+            ->with('alert-type', 'danger');
+        }
+
     }
 
     public function estampa_personalizada()
@@ -271,6 +282,22 @@ class EstampasController extends Controller
                     ->with('alert-msg', 'Não foi possível apagar a estampa "' . $oldName . '". Erro: ' . $th->errorInfo[2])
                     ->with('alert-type', 'danger');
             }
+        }
+    }
+
+    public function getEstampaPrivadaEncomenda(Tshirts $tshirt){
+
+        try{
+            if ($tshirt->estampa->imagem_url) {
+                ob_end_clean();
+                return response()->file(storage_path().'/app/estampas_privadas/'. $tshirt->estampa->imagem_url);
+            }
+        }
+        catch(\Throwable $th)
+        {
+            return redirect()->route('admin.encomendas')
+            ->with('alert-msg', 'A estampa que está a tentar aceder não existe')
+            ->with('alert-type', 'danger');
         }
     }
 }

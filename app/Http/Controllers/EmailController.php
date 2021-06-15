@@ -20,6 +20,6 @@ class EmailController extends Controller
         $tshirts = Tshirts::where('encomenda_id', $encomenda->id)->get();
 
         Mail::to($user)
-            ->queue(new NovaCompra($encomenda, $tshirts));
+            ->send(new NovaCompra($encomenda, $tshirts));
     }
 }

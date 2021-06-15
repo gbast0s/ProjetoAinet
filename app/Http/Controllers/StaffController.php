@@ -130,8 +130,8 @@ class StaffController extends Controller
 
     public function staffChangePass(User $staff)
     {
-        $this->authorize('can_view_change_pass', $staff);
 
+        $this->authorize('can_view_change_pass', $staff);
 
         return view('dashboard.staff_change_pass')
             ->withStaff($staff);

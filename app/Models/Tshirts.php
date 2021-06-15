@@ -16,6 +16,11 @@ class Tshirts extends Model
         return $this->belongsTo(Estampa::class, 'estampa_id');
     }
 
+    public function encomenda()
+    {
+        return $this->belongsTo(Encomendas::class, 'encomenda_id');
+    }
+
     public function cor()
     {
         return $this->belongsTo(Cores::class, 'cor_codigo');

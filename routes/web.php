@@ -7,8 +7,10 @@ use App\Http\Controllers\CompraController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EncomendasController;
 use App\Http\Controllers\EstampasController;
 use App\Http\Controllers\StaffController;
+use App\Models\Encomendas;
 use Illuminate\Support\Facades\Auth;
 
 use App\Policies\StaffPolicy;
@@ -45,8 +47,6 @@ Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(fun
 
 });
 
-
-
 Route::middleware('estampaValida')->prefix('catalogo')->name('catalogo.')->group(function () { //Serve para verificar se quem está a ver a
                                                                                         //estampa a pode ver
     Route::get('estampa/{estampa}', [EstampasController::class, 'estampa_detail'])->name('estampa');
@@ -58,11 +58,12 @@ Route::middleware('estampaValida')->prefix('catalogo')->name('catalogo.')->group
 
 Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('encomendas', [DashboardController::class, 'view_encomendas'])->name('encomendas');
+    Route::get('encomendas', [EncomendasController::class, 'view_encomendas'])->name('encomendas');
     Route::get('perfil/{staff}/alterarpassword', [StaffController::class, 'staffChangePass'])->name('alterarpass');
     Route::put('perfil/{staff}/alterarpassword', [StaffController::class, 'updatestaffPass'])->name('pass.update');
-
-        //->middleware('can:view, staff');
+    Route::post('encomendas/estado', [EncomendasController::class, 'mudarEstado'])->name('encomenda.mudar.estado');
+    Route::get('encomendas/{encomenda}/detalhes', [EncomendasController::class, 'detalhes_encomenda'])->name('encomenda.detalhes_encomenda');
+    Route::get('estampa/{tshirt}/private/encomendas', [EstampasController::class, 'getEstampaPrivadaEncomenda'])->name('estampa.privada');
 
 
     Route::middleware(['admin'])->group(function() {

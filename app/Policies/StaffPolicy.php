@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Encomendas;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -36,6 +37,7 @@ class StaffPolicy
     {
         return $user->id == $staff->id;
     }
+
 
     /**
      * Determine whether the user can create models.
