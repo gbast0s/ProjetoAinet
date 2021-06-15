@@ -64,7 +64,7 @@
                                     <p>{{$pedido['preco']}} €</p>
                                 </td>
                                 <td class="eliminar-produto">
-                                    <form action="{{ route('carrinho.destroy_pedido', ['pedido' => $pedido]) }}" method="POST">
+                                    <form action="{{ route('carrinho.destroy_pedido', ['pedido_id' => $pedido['id']]) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit"><i class="fa fa-times"></i></button>

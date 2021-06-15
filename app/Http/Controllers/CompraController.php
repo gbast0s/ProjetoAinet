@@ -71,7 +71,9 @@ class CompraController extends Controller
     }
 
     public function destroy_pedido(Request $request) {
-        dd($request->pedido);
+        $carrinho = $request->session()->get('carrinho', []);
+
+        dd($carrinho[$request->pedido_id]);
         
     }
 }
