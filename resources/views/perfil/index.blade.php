@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="conta" id="suaConta">
-                        <h4>A minha conta</h4>
+                        <h3 class="titulo">A minha conta</h3>
                         <div class="dados-cliente">
                             <a>Neste espaço, podes visualizar todos os seus dados.</a>
                             <p>Dados de cliente registados</p>
@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="editar-conta" id="editar">
-                        <h4>Edição de dados da conta</h4>
+                        <h3 class="titulo">Edição de dados da conta</h3>
                         <div class="dados-cliente">
                             <a>Neste espaço, podes alterar os teus dados.</a>
                             <p>Dados de cliente para alterar </p>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                     <div class="encomendas" id="suasEncomendas">
-                        <h4>As minhas encomendas</h4>
+                        <h3 class="titulo">As minhas encomendas</h3>
                         <div class="dados-cliente">
                             <a>Neste espaço, podes observar todas as encomendas realizadas por ti.</a>
                             <p>Lista de encomendas registadas </p>

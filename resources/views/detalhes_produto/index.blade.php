@@ -38,7 +38,7 @@
 						<div class="data">
 							<h1>Estampa: {{$estampa->nome}}</h1><br>
 							@if($estampa->descricao)
-								<h5>Descrição: {{$estampa->descricao}}</h5> 
+								<h5>Descrição: </h5><h5>{{$estampa->descricao}}</h5> 
 							@endif
 							<a>Selecione as opções abaixo apresentadas para configurar a t-shirt.</a>
 							<h3>Tamanho</h3>

@@ -15,8 +15,8 @@
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1><span>Magic</span>Shirts</h1>
-									<h2>Vários tipos de Tshirts</h2>
-									<p>Imensos tamanhos e cores de Tshirts com todo o tipo de estampagens! </p>
+									<h2>Vários tipos de t-shirts</h2>
+									<p>Imensos tamanhos e cores de t-shirts com todo o tipo de estampagens! </p>
 								</div>
 								<div class="col-sm-6">
 									<img src="/img/tshirts.png" class="girl img-responsive" alt="" />
@@ -26,7 +26,7 @@
 								<div class="col-sm-6">
 									<h1><span>Magic</span>Shirts</h1>
 									<h2>Estampagens Personalizadas</h2>
-									<p>Fazemos Tshirts com estampagens personalizadas. Peça já a sua!</p>
+									<p>Fazemos t-shirts com estampagens personalizadas. Peça já a sua!</p>
 								</div>
 								<div class="col-sm-6">
 									<img src="/img/estampa_personalizada.png" class="girl img-responsive" alt="" />

@@ -234,7 +234,7 @@ a#scrollUp i{
 
 .mainmenu ul li a:hover, .mainmenu ul li a.active,  .shop-menu ul li a.active{
 	background:none;
-	color:#239dff;
+	color:#fe980f;
 }
 
 .header-middle .row {
@@ -512,7 +512,7 @@ ul.sub-menu{
 
 .single-widget ul li a:hover{
 	background:none;
-	color:#239dff;
+	color:#fe980f;
 }
 
 .single-widget p {
@@ -536,7 +536,7 @@ ul.sub-menu{
 }
 
 .carousel-indicators li.active {
-	  background:#239dff;
+	  background:#fe980f;
 }
 
 .item {
@@ -555,14 +555,14 @@ ul.sub-menu{
 }
 
 .item h1 {
-  color: #B4B1AB;
+  color: #000;
   font-family: abel;
   font-size: 48px;
   margin-top: 115px;
 }
 
 .item h1 span {
-	color:#FE980F;
+	color: #cb3c3c;
 }
 
 .item h2 {
@@ -853,12 +853,12 @@ h2.title {
     height: 600px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #239dff;
+    border: 1px solid #fe980f;
     border-radius: 10px;
 }
 
 .product-overlay {
-  background:#239dff;
+  background:#fe980f;
   top: 0;
   display: none;
   height: 0;
@@ -894,7 +894,7 @@ h2.title {
 
 .product-overlay .add-to-cart:hover {
   background:#fff;
-  color: #239dff;
+  color: #fe980f;
 }
 
 
@@ -1045,9 +1045,9 @@ h2.title {
 	background:none;
 }
 
-/**************************
-******* Catalogo CSS ******
-***************************/
+/***************************
+ ******* Catalogo CSS ******
+ ***************************/
 
 .catalogo .row {
     margin-top: 50px;
@@ -1089,6 +1089,9 @@ h2.title {
   text-decoration: none;
   margin-right: 5px;
   color:#000;
+  height: 31px;
+  display: flex;
+  align-items: center;
 }
 
 .pagination  li  a:hover{
@@ -1324,10 +1327,6 @@ html {
     color: #fe980f;
 }
 
-.group-1, .group-2 {
-    margin-left: 20px;
-}
-
 .list h4, .adicionar h4 {
     text-align: left;
     font-size: 30px;
@@ -1341,21 +1340,47 @@ html {
     margin: 30px 0 0 0;
 }
 
+.list p:last-child {
+    color: #cb3c3c;
+    margin-left: 20px;
+}
+
 .imagens-privadas img {
+    object-fit: contain;
+    max-width: 400px;
     width: auto;
     height: 200px;
     margin: 20px;
+    transition: all 0.5s ease;
+    border: none;
 }
 
 .imagens-privadas {
-    /* border: 2px solid #239dff; */
+    border: 2px solid #FE980F;
     width: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center; 
+	justify-content: center;
     border-radius: 10px;
     padding: 20px;
+    margin: 10px 0;
+}
+
+td.nome-imagem-privada {
+    text-align: center;
     margin-bottom: 10px;
+}
+
+td.botaoApagar{
+    text-align: center;
+}
+
+.imagens-privadas img:hover{
+    opacity: 60%;
+    transition: all 0.5s ease;
+    border: 2px solid #fe980f;
 }
 
 .imagens-privadas tbody {
@@ -1405,42 +1430,6 @@ html {
 .adicionar .add-cart button {
   margin: 20px;
 }
-
-/*
-.imagens-privadas {
-    display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	margin-left: 100px;
-}
-
-.imagens-privadas .imagem{
-    padding-right: 10%;
-}
-
-
-td.nome-imagem-privada {
-    text-align: center;
-    margin-bottom: 10px;
-
-}
-
-td.botaoApagar{
-    text-align: center;
-}
-
-.imagens-privadas img{
-    object-fit: contain;
-    margin-bottom: 10px;
-    max-width: 400px;
-}
-
-.imagens-privadas img:hover{
-    opacity: 60%;
-    border: 2px solid rgba(35, 157, 255, 1);
-} */
-
 
 @media (max-width:1200px) {
 
@@ -1683,7 +1672,7 @@ td.botaoApagar{
 
 button .null {
     opacity: 0.5;
-    background-color: #239dff;
+    background-color: #fe980f;
 }
 
 #editar, #suasEncomendas {
@@ -1700,7 +1689,7 @@ button .null {
  ******* Carrinho CSS ******
  ***************************/
 
- .cart_items .titulo {
+ .titulo {
     text-align: left;
     font-weight: 700;
     color: #fe980f;
@@ -1881,14 +1870,21 @@ button .null {
     border: transparent;
 }
 
-.botoes-carrinho2 a, .botoes-carrinho2 form {
+.botoes-carrinho2 a, .botoes-carrinho2 button {
     margin: 10px 0 10px 10px;
     border: 1px solid #fe980f;
     border-radius: 5px;
+    transition-duration: 0.5s;
+    transition: all 0.5s ease;
 }
 
-.botoes-carrinho2 a:hover {
+.botoes-carrinho2 a:hover, .botoes-carrinho2 button:hover {
     border: 1px solid #fe980f;
+}
+
+.botoes-carrinho2 a:hover, .botoes-carrinho2 button:hover{
+    box-shadow: 2px 2px 5px #666663;
+    transition: 0.5s ease;
 }
 
 /*************************

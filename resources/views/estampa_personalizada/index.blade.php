@@ -20,7 +20,7 @@
 						</div>
 					</div>
                     <div class="list">
-                        <h4 id="ver-estampagens">As suas Estampas</h4>
+                        <h3 id="ver-estampagens" class="titulo">As suas Estampas</h3>
                         <div class="group-1">
                             <a>Aqui, podes observar todas as tuas estampagens.</a>
                             <p>Cliente: {{Auth::user()->name}}</p>
@@ -48,7 +48,7 @@
                                     @endforeach
                                 </div>
                             @else
-                                <a>Não tem estampas Privadas</a>
+                                <p>Não tem estampas privadas</p>
                             @endif
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         {{ $estampasPrivada->withQueryString()->links() }}
                     @endif
                     <div class="adicionar">
-                        <h4 id="adicionar-estampagens">Adicionar nova Estampa</h4>
+                        <h3 id="adicionar-estampagens" class="titulo">Adicionar nova Estampa</h3>
                         <div class="group-2">
                             <a>Nesta secção, podes adicionar uma nova imagem para possível estampagem.</a>
                             <form method="POST" action="{{ route('usuario.estampa.store') }}" class="input" enctype="multipart/form-data">
