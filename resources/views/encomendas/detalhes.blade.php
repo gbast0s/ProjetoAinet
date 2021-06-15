@@ -32,4 +32,14 @@
             <img src="{{$tshirt->estampa->imagem_url ? asset('storage/estampas/' . $tshirt->estampa->imagem_url) : asset('img/default_img.png') }}" class="estampa_tshirt"  alt=""/>
         @endif
     @endforeach
+    <div class="form-group text-right">
+            <a href="{{route('admin.encomendas') }}" class="btn btn-info">Voltar atrás</a>
+    </div>
+
+
+    <div class="form-group text-right">
+            <a href="{{route('admin.encomendas') }}" class="btn btn-outline-dark">Fatura</a>
+    </div>
+        
+
 @endsection
