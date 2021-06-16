@@ -21,8 +21,9 @@ class FaturaController extends Controller
             $filename = $tshirts[0]->encomenda->id."_".$tshirts[0]->encomenda->cliente_id;
             $path = storage_path('app/pdf_recibos/');
             //Meter a vista onde diz view
-            $pdf = PDF::loadView('teste', compact('tshirts'))->setOptions(['defaultFont' => 'sans-serif'])->save($path.$filename.'.pdf');
-            
+            $encomenda = $tshirts[0]->encomenda;
+            $pdf = PDF::loadView('teste', compact('tshirts', 'encomenda'))->setOptions(['defaultFont' => 'sans-serif'])->save($path.$filename.'.pdf');
+
             $filename = $filename.".pdf";
             return response()->file(storage_path().'/app/pdf_recibos/'. $filename);
             //return $filename.".pdf";
