@@ -220,7 +220,7 @@
                                             <td>{{ $enc->tipo_pagamento }}</td>
                                             <td>{{ $enc->ref_pagamento }}</td>
                                             @if ($enc->recibo_url)
-                                                <td><a href="" class="btn btn-primary btn-sm" role="button" aria-pressed="true" target="_blank">Ver recibo</a></td>
+                                                <td><a href="" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Ver recibo</a></td>
                                             @else
                                                 <td><a class="btn btn-secondary btn-sm null" role="button" aria-pressed="true" target="_blank">Ver recibo</a></td>
                                             @endif
