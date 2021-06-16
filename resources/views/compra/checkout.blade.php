@@ -55,12 +55,12 @@
                 </div>
             </div>
             <div class="botoes-carrinho3">
-                <a class="btn btn-default update" href="{{ route('usuario.perfil') }}">Atualizar os dados</a>
+                <a class="btn btn-default update" href="{{ route('usuario.perfil') }}" target="_blank">Atualizar os dados</a>
             </div>
         @else
             <div class="botoes-carrinho3">
                 <p>Os dados não estão atualizados.</p>
-                <a class="btn btn-default update" href="{{ route('usuario.perfil') }}">Atualizar os dados</a>
+                <a class="btn btn-default update" href="{{ route('usuario.perfil') }}" target="_blank">Atualizar os dados</a>
             </div>
         @endif
 
