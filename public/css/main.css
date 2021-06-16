@@ -1735,9 +1735,18 @@ td.botaoApagar {
     width: 9%;
 }
 
-button .null {
+.tabela-encomendas td a {
+    font-size: 15px;
+    border: 1px solid #8c8c88;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(236, 203, 113);
+}
+
+.null {
     opacity: 0.5;
-    background-color: #fe980f;
+    background-color: #c2c0be;
+    padding: 5px;
 }
 
 #editar,

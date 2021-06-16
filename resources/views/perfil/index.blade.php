@@ -114,7 +114,7 @@
                                         <p><input type="text" name="name" class="form-control" value="{{ old('name', $cliente->user->name) }}" required></p>
                                     </div>
                                 </div>
-                                @error('name')     
+                                @error('name')
                                     <div class="small text-danger">O campo do nome é obrigatório</div>
                                 @enderror
                                 <div class="lista-dados-cliente">
@@ -220,9 +220,9 @@
                                             <td>{{ $enc->tipo_pagamento }}</td>
                                             <td>{{ $enc->ref_pagamento }}</td>
                                             @if ($enc->recibo_url)
-                                                <td><a href="" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Ver recibo</a></td>
+                                                <td><a href="" role="button" aria-pressed="true">Ver recibo</a></td>
                                             @else
-                                                <td><a class="btn btn-secondary btn-sm null" role="button" aria-pressed="true" target="_blank">Ver recibo</a></td>
+                                                <td><a class="null" role="button" aria-pressed="true" target="_blank">Ver recibo</a></td>
                                             @endif
                                         </tr>
                                         @endforeach
