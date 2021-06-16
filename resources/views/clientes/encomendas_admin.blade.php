@@ -54,9 +54,9 @@
                     <td>{{$encomenda->ref_pagamento}}</td>
                     @if($encomenda->recibo_url)
                         <td>
-                            <form action="" method="GET">
-                                <input type="button" class="btn btn-outline-dark" value="Fatura">
-                            </form>
+                        <div class="form-group text-right">
+                            <a href="" class="btn btn-outline-dark" target="_blank">Fatura</a>
+                        </div>
                         </td>
                     @endif
                 </tr>
