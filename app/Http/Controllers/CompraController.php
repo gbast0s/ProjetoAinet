@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CarrinhoPost;
 use App\Models\Estampa;
 use App\Models\Preco;
 use Illuminate\Http\Request;
@@ -46,39 +47,36 @@ class CompraController extends Controller
             ->withCliente($cliente);
     }
 
-    public function store_pedido(Request $request, Estampa $estampa)
+    public function store_pedido(CarrinhoPost $request, Estampa $estampa)
     {
 
-        $preco = Preco::first();
-        $cor = Cores::where('codigo', $request->cor)->first();
+        $validatedData = $request->validated();
 
-        if($request->quantidade < 0)
-        {
-            $request->quantidade = 1;
-        }
+        $preco = Preco::first();
+        $cor = Cores::where('codigo', $validatedData['cor'])->first();
 
         $carrinho = $request->session()->get('carrinho', []);
 
 
         if($estampa->cliente_id)
         {
-            $preco_un = $request->quantidade < 5 ? $preco->preco_un_proprio  : $preco->preco_un_proprio_desconto;
-            $preco = $request->quantidade < 5 ? ($preco->preco_un_proprio * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 )  : ($preco->preco_un_proprio_desconto * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 );
+            $preco_un = $validatedData['quantidade'] < 5 ? $preco->preco_un_proprio  : $preco->preco_un_proprio_desconto;
+            $preco = $validatedData['quantidade'] < 5 ? ($preco->preco_un_proprio * $validatedData['quantidade']) + ($carrinho[$estampa->id."_".$validatedData['cor']."_".$validatedData['tam']]['preco'] ?? 0 )  : ($preco->preco_un_proprio_desconto * $validatedData['quantidade']) + ($carrinho[$estampa->id."_".$validatedData['cor']."_".$validatedData['tam']]['preco'] ?? 0 );
 
         }
         else
         {
-            $preco_un = $request->quantidade < 5 ? $preco->preco_un_catalogo  : $preco->preco_un_catalogo_desconto;
-            $preco = $request->quantidade < 5 ? ($preco->preco_un_catalogo * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 ) : ($preco->preco_un_catalogo_desconto * $request->quantidade) + ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['preco'] ?? 0 );
+            $preco_un = $validatedData['quantidade'] < 5 ? $preco->preco_un_catalogo  : $preco->preco_un_catalogo_desconto;
+            $preco = $validatedData['quantidade'] < 5 ? ($preco->preco_un_catalogo * $validatedData['quantidade']) + ($carrinho[$estampa->id."_".$validatedData['cor']."_".$validatedData['tam']]['preco'] ?? 0 ) : ($preco->preco_un_catalogo_desconto * $validatedData['quantidade']) + ($carrinho[$estampa->id."_".$validatedData['cor']."_".$validatedData['tam']]['preco'] ?? 0 );
         }
 
-        $qtd = ($carrinho[$estampa->id."_".$request->cor."_".$request->tam]['qtd'] ?? 0) + $request->quantidade;
-        $carrinho[$estampa->id."_".$request->cor."_".$request->tam] = [
-            'id' => $estampa->id."_".$request->cor."_".$request->tam,
+        $qtd = ($carrinho[$estampa->id."_".$validatedData['cor']."_".$validatedData['tam']]['qtd'] ?? 0) + $validatedData['quantidade'];
+        $carrinho[$estampa->id."_".$validatedData['cor']."_".$validatedData['tam']] = [
+            'id' => $estampa->id."_".$validatedData['cor']."_".$validatedData['tam'],
             'estampa' => $estampa,
             'cor' => $cor,
             'qtd' => $qtd,
-            'tam' => $request->tam,
+            'tam' => $validatedData['tam'],
             'preco' => $preco,
             'preco_un' => $preco_un,
         ];

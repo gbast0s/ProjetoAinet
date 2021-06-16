@@ -44,43 +44,52 @@
 						<h3>Tamanho</h3>
 						<div class="tamanho">
 							<label>
-								<input type="radio" value="XS" name="tam" required>
+								<input type="radio" value="XS" name="tam" {{old('tam',  $tshirt->tamanho) == 'XS' ? 'checked' : ''}} required>
 								<span class="checkmark">XS</span>
 							</label>
 							<label>
-								<input type="radio" value="S" name="tam">
+								<input type="radio" value="S" name="tam" {{old('tam',  $tshirt->tamanho) == 'S' ? 'checked' : ''}}>
 								<span class="checkmark">S</span>
 							</label>
 							<label>
-								<input type="radio" value="M" name="tam">
+								<input type="radio" value="M" name="tam" {{old('tam',  $tshirt->tamanho) == 'M' ? 'checked' : ''}}>
 								<span class="checkmark">M</span>
 							</label>
 							<label>
-								<input type="radio" value="L" name="tam">
+								<input type="radio" value="L" name="tam" {{old('tam',  $tshirt->tamanho) == 'L' ? 'checked' : ''}}>
 								<span class="checkmark">L</span>
 							</label>
 							<label>
-								<input type="radio" value="XL" name="tam">
+								<input type="radio" value="XL" name="tam" {{old('tam',  $tshirt->tamanho) == 'XL' ? 'checked' : ''}}>
 								<span class="checkmark">XL</span>
 							</label>
 						</div>
+						@error('tam')
+								<div class="small text-danger">{{$message}}</div>
+						@enderror
 						<h3>Cor</h3>
 							<form class="cor">
 								<div class="linha2-cores">
 									<select class="select-dropdown" id="mySelect" name="cor" onchange="mudar_tshirt()" required>
 									@foreach($cores as $cor)
-											<option name="cor" value="{{$cor->codigo}}">{{$cor->nome}}</option>
+											<option name="cor" value="{{$cor->codigo}}" {{$cor->codigo == old('cor', $tshirt->cor_codigo) ? 'selected' : ''}}>{{$cor->nome}}</option>
 									@endforeach	
 									</select>										
 								</div>	
 							</form>
+							@error('cor')
+								<div class="small text-danger">{{$message}}</div>
+							@enderror
 						<div class="preco">
 							<div class="quantidade">
 								<h3>Quantidade </h3>
 								<button type="button" class="o" id="botao" onclick="decrementar()">-</button>
-								<input type="text" name="quantidade" id="quantidade" value="1" required>
+								<input type="text" name="quantidade" id="quantidade" value="{{old('quantidade', $tshirt->quantidade) ?? '1'}}" required>
 								<button  class="o" type="button" id="botao" onclick="incrementar()">+</button>
 							</div>
+							@error('quantidade')
+								<div class="small text-danger">{{$message}}</div>
+							@enderror
 							<div class="valor">
 								<h3>Preço Base</h3>
 								@if($estampa->cliente_id == null)

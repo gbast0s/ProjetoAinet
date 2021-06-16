@@ -67,13 +67,16 @@ class EstampasController extends Controller
     public function estampa_detail(Estampa $estampa)
     {
         $preco = Preco::first();
-        $cores = Cores::all();        
+        $cores = Cores::all();  
+        
+        $newtshirt = new Tshirts();
         
 
         return view('detalhes_produto.index')   
             ->withEstampa($estampa)
             ->withPreco($preco)
-            ->withCores($cores);
+            ->withCores($cores)
+            ->withTshirt($newtshirt);
     }
 
     public function getEstampa(Estampa $estampa){
