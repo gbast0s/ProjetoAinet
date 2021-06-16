@@ -15,6 +15,14 @@
             </div>
             </div>
         </form>
+        <form method="GET" action="{{route('admin.clientes')}}" class="form-group">
+            <div class="input-group mb-3">
+                <input type="text" name="id" class="form-control" value="{{old('id', $id)}}" placeholder="ID Cliente" aria-label="ID Cliente" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
     <table class="table">

@@ -77,6 +77,16 @@ class EncomendasController extends Controller
 
         $this->authorize('view_encomendas_mudarEstado', $encomenda);
 
+        if($request->estado == 'fechada')
+        {
+            $status = FaturaController::gerarFatura($encomenda);
+
+            if($status)
+            {
+                $encomenda->recibo_url = $status;
+            }
+        }
+
         $encomenda->estado = $request->estado;
 
         $encomenda->save();

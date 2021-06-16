@@ -57,11 +57,16 @@ class ClienteController extends Controller
     {
 
         $status = $request->status ?? '';
+        $id = $request->id ?? '';
 
         if($status != null){
             $clientes = Clientes::whereHas('user', function($query) use ($status){
                 $query->where('bloqueado', $status);
             })->paginate(10);
+        }
+        elseif($id != null)
+        {
+            $clientes = Clientes::where('id', $id)->paginate(10); 
         }
         else
         {
@@ -72,6 +77,7 @@ class ClienteController extends Controller
 
         return view('clientes.index')
             ->withClientes($clientes)
+            ->withId($id)
             ->withSelectedStatus($status);
     }
 

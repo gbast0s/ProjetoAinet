@@ -35,20 +35,20 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Cliente ID</th>
                 <th>Estado</th>
                 <th>Data</th>
                 <th>Preço Total</th>
-                <th>Notas</th>
                 <th>NIF</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($encomendas as $encomenda)
                 <tr>
+                    <td>{{$encomenda->cliente_id}}</td>
                     <td>{{strtoupper($encomenda->estado)}}</td>
                     <td>{{$encomenda->data}}</td>
                     <td>{{$encomenda->preco_total}} €</td>
-                    <td>{{$encomenda->notas}}</td>
                     <td>{{$encomenda->nif}}</td>
                     <td><a href="{{ route('admin.encomenda.detalhes_encomenda', $encomenda) }}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Detalhes</a></td>
                     @if($encomenda->estado == "pendente")

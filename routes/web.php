@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EncomendasController;
 use App\Http\Controllers\EstampasController;
+use App\Http\Controllers\FaturaController;
 use App\Http\Controllers\StaffController;
 use App\Models\Encomendas;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,8 @@ Route::post('/carrinho/{estampa}', [CompraController::class, 'store_pedido'])->n
 Route::delete('carrinho/destroy', [CompraController::class, 'destroy'])->name('carrinho.destroy');
 Route::delete('carrinho', [CompraController::class, 'destroy_pedido'])->name('carrinho.destroy_pedido');
 Route::put('carrinho/update', [CompraController::class, 'update_pedido'])->name('carrinho.update_pedido');
+
+Route::get('pdf', [FaturaController::class, 'gerarFatura']);
 
 
 Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(function () {
