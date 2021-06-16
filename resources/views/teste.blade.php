@@ -58,6 +58,17 @@
             box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
         }
 
+        .line td {
+            border: 1px solid black;
+        }
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
     </style>
 </head>
 <body>
@@ -91,7 +102,7 @@
                                     <br>
                                 </address>
                             </div>
-                            <div class="col-xs-6 text-right">
+                            <div class="col-xs-6">
                                 <address>
                                     <strong>Enviado para:</strong><br>
                                     {{$encomenda->endereco}}<br>
@@ -115,7 +126,7 @@
                                     <br>
                                 </address>
                             </div>
-                            <div class="col-xs-6 text-right">
+                            <div class="col-xs-6">
                                 <address>
                                     <strong>Data da encomenda:</strong><br>
                                     {{$encomenda->data}}<br>
@@ -130,8 +141,8 @@
                                     <thead>
                                         <tr class="line">
                                             <td></td>
-                                            <td class="text-center"><strong>NOME</strong></td>
-                                            <td class="text-center"><strong>QUANTIDADE</strong></td>
+                                            <td><strong>NOME</strong></td>
+                                            <td class="text-right"><strong>QUANTIDADE</strong></td>
                                             <td class="text-right"><strong>UNIDADE</strong></td>
                                             <td class="text-right"><strong>SUBTOTAL</strong></td>
                                         </tr>
@@ -145,8 +156,8 @@
                                             @else
                                             <td><strong>Estampa: Inacessivel</strong><br>No momento da faturação a estampa requerida não se encontrava disponivel</td>
                                             @endif
-                                            <td class="text-center">{{$tshirt->quantidade}}</td>
-                                            <td class="text-center">{{$tshirt->preco_un}} €</td>
+                                            <td class="text-right">{{$tshirt->quantidade}}</td>
+                                            <td class="text-right">{{$tshirt->preco_un}} €</td>
                                             <td class="text-right">{{$tshirt->subtotal}} €</td>
                                         </tr>
                                         @endforeach
