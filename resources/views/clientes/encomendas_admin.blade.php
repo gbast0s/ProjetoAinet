@@ -55,7 +55,7 @@
                     @if($encomenda->recibo_url)
                         <td>
                         <div class="form-group text-right">
-                            <a href="" class="btn btn-outline-dark" target="_blank">Fatura</a>
+                            <a href="{{ route('fatura.mostrar', $encomenda->recibo_url) }}" class="btn btn-outline-dark" target="_blank">Fatura</a>
                         </div>
                         </td>
                     @endif

@@ -220,9 +220,9 @@
                                             <td>{{ $enc->tipo_pagamento }}</td>
                                             <td>{{ $enc->ref_pagamento }}</td>
                                             @if ($enc->recibo_url)
-                                                <td><a href="" role="button" aria-pressed="true">Ver recibo</a></td>
+                                                <td><a href=" {{ route('fatura.mostrar', $enc->recibo_url) }}" role="button" aria-pressed="true" target="_blank">Ver recibo</a></td>
                                             @else
-                                                <td><a class="null" role="button" aria-pressed="true" target="_blank">Ver recibo</a></td>
+                                                <td><a class="null" role="button" aria-pressed="true">Ver recibo</a></td>
                                             @endif
                                         </tr>
                                         @endforeach

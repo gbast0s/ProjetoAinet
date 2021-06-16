@@ -35,4 +35,18 @@ class EncomendasPolicy
             return false;
         }
     }
+
+    public function view_faturas(User $user, Encomendas $encomenda)
+    {
+        if($user->isAdmin())
+        {
+            return true;
+        }
+        elseif($user->id == $encomenda->cliente_id)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

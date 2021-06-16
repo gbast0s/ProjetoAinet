@@ -30,8 +30,7 @@ Route::delete('carrinho/destroy', [CompraController::class, 'destroy'])->name('c
 Route::delete('carrinho', [CompraController::class, 'destroy_pedido'])->name('carrinho.destroy_pedido');
 Route::put('carrinho/update', [CompraController::class, 'update_pedido'])->name('carrinho.update_pedido');
 
-Route::get('pdf', [FaturaController::class, 'gerarFatura']);
-
+Route::get('faturas/{fatura}', [EncomendasController::class, 'mostrarFatura'])->name('fatura.mostrar');
 
 Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(function () {
 

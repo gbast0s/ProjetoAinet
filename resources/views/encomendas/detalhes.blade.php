@@ -54,7 +54,7 @@
         <div class="botoes-detalhes">
             @if(Auth::user()->tipo == 'A' && $encomenda->recibo_url)
                 <div class="form-group text-right">
-                    <a href="{{route('admin.encomendas') }}" class="btn btn-outline-dark">Fatura</a>
+                    <a href="{{route('fatura.mostrar', $encomenda->recibo_url) }}" class="btn btn-outline-dark" target="_blank">Fatura</a>
                 </div>
             @endif
             <div class="form-group text-right">

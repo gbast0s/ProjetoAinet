@@ -84,6 +84,7 @@ class EncomendasController extends Controller
             if($status)
             {
                 $encomenda->recibo_url = $status;
+                EmailController::enviar_email_com_fatura($encomenda);
             }
         }
 
@@ -107,5 +108,16 @@ class EncomendasController extends Controller
         return view('encomendas.detalhes')
                 ->withTshirts($tshirts)
                 ->withEncomenda($encomenda);
+    }
+
+    public function mostrarFatura($fatura)
+    {
+        $encomenda = Encomendas::where('recibo_url', $fatura)->firstOrFail();
+
+
+        $this->authorize('view_faturas', $encomenda);
+
+        $path = storage_path('app/pdf_recibos/'.$fatura);
+        return response()->file($path);
     }
 }
