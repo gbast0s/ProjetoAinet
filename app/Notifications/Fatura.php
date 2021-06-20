@@ -40,12 +40,12 @@ class Fatura extends Notification
         $path = storage_path('app/pdf_recibos/' .$this->fatura);
 
         return (new MailMessage)
-            ->greeting('Hello!')
-            ->line('One of your invoices has been paid!')
-            ->line('It is available online')
-            ->action('View Invoice', $url)
-            ->line('The file is also available as an attachment in this email')
-            ->line('Thank you for using our application!')
+            ->greeting('Olá')
+            ->line('Uma das tuas encomendas foi finalizada')
+            ->line('Podes ver a fatura online')
+            ->action('Ver Fatura', $url)
+            ->line('O ficheiro vem ainda anexado a este email')
+            ->line('Obrigado por comprares na MagicShirts!')
             ->attach($path);
     }
 
