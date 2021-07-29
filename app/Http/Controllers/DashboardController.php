@@ -39,7 +39,7 @@ class DashboardController extends Controller
             ->withTotalGrafico($total_grafico)
             ->withAno($ano);
     }
-
+    
     // PREÇOS //
 
     public function view_precos()
@@ -146,31 +146,6 @@ class DashboardController extends Controller
                     ->with('alert-type', 'danger');
             }
         }
-    }
-
-    //Encomendas
-
-    public function view_encomendas(Request $request)
-    {
-        $ano = $request->ano ?? date("Y");
-
-
-        $ganhosMensais_mes = Encomendas::ganhosMensais();
-        $ganhosMensais = $ganhosMensais_mes[0];
-        $Mes = $ganhosMensais_mes[1];
-        $ganhosAnuais = Encomendas::ganhosAnuais();
-        $total_clientes = Clientes::totalClientes();
-        $total_encomendas_pendentes = Encomendas::encomendasPendentes();
-        $total_grafico = Encomendas::ganhosMensaisGrafico($ano);
-
-        return view('dashboard.index')
-            ->withGanhosMensais($ganhosMensais)
-            ->withMes($Mes)
-            ->withGanhosAnuais($ganhosAnuais)
-            ->withTotalClientes($total_clientes)
-            ->withEncomendasPendentes($total_encomendas_pendentes)
-            ->withTotalGrafico($total_grafico)
-            ->withAno($ano);
     }
 
     //Cores

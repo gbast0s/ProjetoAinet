@@ -20,12 +20,7 @@ class Clientes extends Model
 
         $total_clientes = 0;
 
-        $clientes = Clientes::all();
-
-        foreach($clientes as $cliente)
-        {
-            $total_clientes += 1; 
-        }
+        $total_clientes = Clientes::count();
 
         return $total_clientes;
     }
@@ -33,5 +28,10 @@ class Clientes extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id');
+    }
+
+    public function encomendas()
+    {
+        return $this->hasMany(Encomendas::class);
     }
 }

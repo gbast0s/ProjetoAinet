@@ -13,4 +13,9 @@ class Categorias extends Model
     protected $fillable = ['nome'];
 
     public $timestamps = false;
+
+    public function estampas()
+    {
+        return $this->hasMany(Estampa::class);
+    }
 }

@@ -1,5 +1,3 @@
-
-
 <?php
 
 use App\Http\Controllers\ClienteController;
@@ -7,19 +5,12 @@ use App\Http\Controllers\CompraController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EncomendasController;
 use App\Http\Controllers\EstampasController;
-use App\Http\Controllers\FaturaController;
 use App\Http\Controllers\StaffController;
-use App\Models\Encomendas;
 use Illuminate\Support\Facades\Auth;
 
-use App\Policies\StaffPolicy;
-
-// Route::get('/', function () {
-//     //return view('welcome');
-//     return view('pages.index');
-// });
 
 Route::get('/', [EstampasController::class, 'index'])->name('home');
 Route::get('catalogo', [EstampasController::class, 'catalogo'])->name('catalogo');
@@ -30,11 +21,13 @@ Route::delete('carrinho/destroy', [CompraController::class, 'destroy'])->name('c
 Route::delete('carrinho', [CompraController::class, 'destroy_pedido'])->name('carrinho.destroy_pedido');
 Route::put('carrinho/update', [CompraController::class, 'update_pedido'])->name('carrinho.update_pedido');
 
+
 Route::get('faturas/{fatura}', [EncomendasController::class, 'mostrarFatura'])->name('fatura.mostrar');
 
 Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(function () {
 
     Route::get('estampa_personalizada', [EstampasController::class, 'estampa_personalizada'])->name('estampa_personalizada');
+    Route::get('estampa_personalizada/{id}', [EstampasController::class, 'estampa_personalizada'])->name('estampa_personalizada.id');
     Route::post('estampa_personalizada', [EstampasController::class, 'store_estampa_privada'])->name('estampa.store');
     Route::get('perfil', [ClienteController::class, 'perfil'])->name('perfil');
     Route::put('perfil/{cliente}', [ClienteController::class, 'updateClientesInfo'])->name('clientes.update');
@@ -72,34 +65,29 @@ Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(fun
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        //Clientes
+        //TODO: Clientes
         Route::get('clientes', [ClienteController::class, 'admin_view_clientes'])->name('clientes');
         Route::get('clientes/{cliente}/encomendas/', [ClienteController::class, 'admin_encomendas'])->name('clientes.encomendas');
         Route::post('clientes', [ClienteController::class, 'bloquearDesbloquearClientes'])->name('clientes.unlock');
         Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
          //->middleware('can:delete,cliente'); Não funciona
 
-        //Staff
+        //TODO: Staff
         Route::get('staff', [StaffController::class, 'admin'])->name('staff');
         Route::post('staff/block', [StaffController::class, 'bloquearDesbloquearStaff'])->name('staff.unlock');
         Route::delete('staff/{staff}', [StaffController::class, 'destroy'])->name('staff.destroy');
         Route::post('staff', [StaffController::class, 'store'])->name('staff.store');
-        //->middleware('can:create,App\Models\Docente');
         Route::put('staff/{staff}', [StaffController::class, 'update'])->name('staff.update');
-        //->middleware('can:update,docente');
         Route::get('staff/{staff}/edit', [StaffController::class, 'edit'])->name('staff.edit');
-        //->middleware('can:view,docente');
         Route::get('staff/create', [StaffController::class, 'create'])->name('staff.create');
-        //->middleware('can:create,App\Models\Docente');
         Route::delete('staff/{staff}/foto', [StaffController::class, 'destroy_foto'])->name('staff.foto.destroy');
-        //->middleware('can:update,docente');
 
-        //Precos
+        //TODO: Precos
         Route::get('precos', [DashboardController::class, 'view_precos'])->name('precos');
         Route::get('precos/{precos}/edit', [DashboardController::class, 'edit_precos'])->name('precos.edit');
         Route::put('precos/{precos}', [DashboardController::class, 'update_precos'])->name('precos.update');
 
-        //Categorias
+        //TODO: Categorias
         Route::get('categorias', [DashboardController::class, 'view_categorias'])->name('categorias');
         Route::get('categorias/create', [DashboardController::class, 'create_categoria'])->name('categorias.create');
         Route::post('categorias', [DashboardController::class, 'store_categoria'])->name('categorias.store');
@@ -107,7 +95,7 @@ Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(fun
         Route::put('categorias/{categoria}', [DashboardController::class, 'update_categoria'])->name('categorias.update');
         Route::delete('categorias/{categoria}', [DashboardController::class, 'destroy_categoria'])->name('categorias.destroy');
 
-        //Estampas
+        //TODO: Estampas
         Route::get('estampas', [EstampasController::class, 'admin_view_estampas'])->name('estampas');
         Route::get('estampas/create', [EstampasController::class, 'create'])->name('estampas.create');
         Route::post('estampas', [EstampasController::class, 'store'])->name('estampas.store');
@@ -115,7 +103,7 @@ Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(fun
         Route::put('estampas/{estampa}', [EstampasController::class, 'update'])->name('estampas.update');
         Route::delete('estampas/{estampa}', [EstampasController::class, 'destroy'])->name('estampas.destroy');
 
-        //Cores
+        //TODO: Cores
         Route::get('cores', [DashboardController::class, 'view_cores'])->name('cores');
         Route::get('cores/create', [DashboardController::class, 'create_cor'])->name('cores.create');
         Route::post('cores', [DashboardController::class, 'store_cor'])->name('cores.store');
@@ -128,4 +116,3 @@ Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(fun
 
 Auth::routes(['verify' => true]);
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

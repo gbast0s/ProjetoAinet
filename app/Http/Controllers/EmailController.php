@@ -17,7 +17,7 @@ class EmailController extends Controller
     {
         // SEND EMAIL WITH MAILABLE CLASS
         // Send to user:
-        $user = User::findOrFail(Auth::user()->id);
+        //$user = User::findOrFail(Auth::user()->id);
         $tshirts = Tshirts::where('encomenda_id', $encomenda->id)->get();
 
         Mail::to($user)
@@ -31,8 +31,6 @@ class EmailController extends Controller
         // Send to user:
         $user = User::findOrFail($encomenda->cliente->user->id);
         $user->notify(new Fatura($fatura));
-        return redirect()->route('admin.encomendas')
-            ->with('alert-type', 'success')
-            ->with('alert-msg', 'E-Mail sent with success (using Notifications)');
+        return redirect()->route('admin.encomendas');
     }
 }

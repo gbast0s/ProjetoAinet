@@ -14,7 +14,7 @@
                     <div class="barra">
 						<div class="mainmenu">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="#ver-estampagens">As minhas Estampas</a></li>
+								<li><a href="{{ route('usuario.estampa_personalizada.id',  '#ver-estampagens')}}">As minhas Estampas</a></li>
 								<li><a href="#adicionar-estampagens">Adicionar nova Estampa</a></li>
 							</ul>
 						</div>

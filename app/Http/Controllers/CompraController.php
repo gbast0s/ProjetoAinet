@@ -164,8 +164,7 @@ class CompraController extends Controller
 
     public function store_compra(Request $request)
     {
-
-        $cliente = Clientes::findOrFail($request->cliente);
+        $cliente = Clientes::where('id', Auth::user()->id)->first();
 
         if(!$cliente->nif){
             return back()
@@ -173,11 +172,19 @@ class CompraController extends Controller
             ->with('alert-type', 'danger');
         }
 
+        $carrinho = $request->session()->get('carrinho', []);
+        
+        $custo_total = 0;
+
+        foreach($carrinho as $pedido){
+            $custo_total += $pedido['preco'];
+        }
+
         $newEncomenda = new Encomendas();
         $newEncomenda->estado = "pendente";
         $newEncomenda->cliente_id = $cliente->id;
         $newEncomenda->data = date('Y-m-d');
-        $newEncomenda->preco_total = $request->total_encomenda;
+        $newEncomenda->preco_total = $custo_total;
         $newEncomenda->notas = $request->notas;
         $newEncomenda->nif = $cliente->nif;
         $newEncomenda->endereco = $cliente->endereco;
@@ -186,7 +193,6 @@ class CompraController extends Controller
 
         $newEncomenda->save();
 
-        $carrinho = $request->session()->get('carrinho', []);
 
         foreach($carrinho as $pedido)
         {

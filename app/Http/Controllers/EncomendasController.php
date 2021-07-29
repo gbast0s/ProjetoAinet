@@ -15,7 +15,7 @@ class EncomendasController extends Controller
         $status = $request->status ?? '';
         $data = $request->data ?? '';
 
-        if($status != null){
+        if($status != null && $data == null){
             if(Auth::user()->isAdmin())
             {
                 $qry = Encomendas::where('estado', $status);
@@ -24,20 +24,20 @@ class EncomendasController extends Controller
             else
             {
                 if($status == 'pendente'){
-                    $qry = Encomendas::where('estado', 'pendente');
+                    $qry = Encomendas::where('estado', $status);
                 
                 }elseif($status == 'paga')
                 {
-                    $qry = Encomendas::where('estado', 'paga');
+                    $qry = Encomendas::where('estado', $status);
                 }  
                 else
                 {
-                    $qry = Encomendas::where('estado', 'pendente')->where('data', 'LIKE', '%' . $data . '%')
-                                        ->orwhere('estado', 'paga')->where('data', 'LIKE', '%' . $data . '%');
+                    $qry = Encomendas::where('estado', 'pendente')
+                                        ->orwhere('estado', 'paga');
                 }         
             }
         }
-        else if($data != null)
+        else if($data != null && $status == null)
         {
             if(Auth::user()->isAdmin())
             {
@@ -47,6 +47,28 @@ class EncomendasController extends Controller
             {
                 $qry = Encomendas::where('estado', 'pendente')->where('data', 'LIKE', '%' . $data . '%')
                                     ->orwhere('estado', 'paga')->where('data', 'LIKE', '%' . $data . '%');
+            }
+        }
+        elseif($data && $status)
+        {
+            if(Auth::user()->isAdmin())
+            {
+                $qry = Encomendas::where('estado', $status)->where('data', 'LIKE', '%' . $data . '%');
+            }
+            else
+            {
+                if($status == 'pendente'){
+                    $qry = Encomendas::where('estado', $status)->where('data', 'LIKE', '%' . $data . '%');
+                
+                }elseif($status == 'paga')
+                {
+                    $qry = Encomendas::where('estado', $status)->where('data', 'LIKE', '%' . $data . '%');
+                }  
+                else
+                {
+                    $qry = Encomendas::where('estado', 'pendente')->where('data', 'LIKE', '%' . $data . '%')
+                                        ->orwhere('estado', 'paga')->where('data', 'LIKE', '%' . $data . '%');
+                } 
             }
         }
         else

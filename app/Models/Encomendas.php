@@ -21,14 +21,7 @@ class Encomendas extends Model
         $total = 0;
         $data = date("Y-m");
 
-        $qry = Encomendas::where('data', 'LIKE', $data . '%')->where('estado', 'fechada');
-
-        $encomendas = $qry->get();
-
-        foreach ($encomendas as $encomenda)
-        {
-           $total+= $encomenda->preco_total;
-        }
+        $total = Encomendas::where('data', 'LIKE', $data . '%')->where('estado', 'fechada')->sum('preco_total');
 
         $mes = FuncoesAuxiliares::converterNumMes();
 
@@ -43,14 +36,7 @@ class Encomendas extends Model
         $total = 0;
         $data = date("Y");
 
-        $qry = Encomendas::where('data', 'LIKE', $data . '%')->where('estado', 'fechada');
-
-        $encomendas = $qry->get();
-
-        foreach ($encomendas as $encomenda)
-        {
-           $total+= $encomenda->preco_total;
-        }
+        $total = Encomendas::where('data', 'LIKE', $data . '%')->where('estado', 'fechada')->sum('preco_total');
 
         return $total;
 
@@ -60,14 +46,7 @@ class Encomendas extends Model
     {
         $total_encomendas = 0;
 
-        $qry = Encomendas::where('estado', 'pendente');
-
-        $encomendas = $qry->get();
-
-        foreach ($encomendas as $encomenda)
-        {
-           $total_encomendas += 1;
-        }
+        $total_encomendas = Encomendas::where('estado', 'pendente')->count();
 
         return $total_encomendas;
 
@@ -112,5 +91,10 @@ class Encomendas extends Model
     public function cliente()
     {
         return $this->belongsTo(Clientes::class, 'cliente_id');
+    }
+
+    public function tshirts()
+    {
+        return $this->hasMany(Tshirts::class);
     }
 }

@@ -8,25 +8,25 @@
     <div class="col-9">
         <form method="GET" action="" class="form-group">
             <div class="input-group">
-            <select class="custom-select" name="status" id="inputStatus" aria-label="Status">
-                <option value="" {{'' == old('status', $selectedStatus) ? 'selected' : ''}}>Todos as encomendas</option>
-                <option value="pendente" {{'pendente' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Pendentes</option>
-                <option value="paga" {{'paga' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Pagas</option>
-                @if(Auth::user()->isAdmin())
-                    <option value="fechada" {{'fechada' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Fechadas</option>
-                    <option value="anulada" {{'anulada' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Anuladas</option>
-                @endif
-            </select>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
-            </div>
-            </div>
-        </form>
-        <form method="GET" action="" class="form-group">
-            <div class="input-group mb-3">
-                <input type="text" name="data" class="form-control" value="{{old('data', $data)}}" placeholder="Data Encomenda" aria-label="Data Encomenda" aria-describedby="basic-addon2">
+                <select class="custom-select" name="status" id="inputStatus" aria-label="Status">
+                    <option value="" {{'' == old('status', $selectedStatus) ? 'selected' : ''}}>Todos as encomendas</option>
+                    <option value="pendente" {{'pendente' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Pendentes</option>
+                    <option value="paga" {{'paga' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Pagas</option>
+                    @if(Auth::user()->isAdmin())
+                        <option value="fechada" {{'fechada' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Fechadas</option>
+                        <option value="anulada" {{'anulada' == old('status', $selectedStatus) ? 'selected' : ''}}>Encomendas Anuladas</option>
+                    @endif
+                </select>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+                </div>
+            </div>
+            <div class="data_encomendas">
+                <div class="input-group mb-3">
+                    <input type="text" name="data" class="form-control" value="{{old('data', $data)}}" placeholder="Data Encomenda" aria-label="Data Encomenda" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -40,6 +40,7 @@
                 <th>Data</th>
                 <th>Preço Total</th>
                 <th>NIF</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

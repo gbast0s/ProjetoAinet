@@ -58,4 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
         
         return $this->tipo=='C';
     }
+
+    public function cliente()
+    {
+        return $this->hasOne(Clientes::class);
+    }
 }

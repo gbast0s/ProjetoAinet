@@ -34,21 +34,21 @@ class StaffPost extends FormRequest
                     'email',
                     (!is_null($this->staff)) ? Rule::unique('users', 'email')->ignore($this->staff->id) : Rule::unique('users', 'email'),
                 ],            
-                'tipo' =>                   'required',
+                'tipo' =>                   'required|regex:/^[A,F]+$/',
                 'password' =>               'nullable',
                 'foto' =>                   'image|max:8192',   // Máximum size = 8Mb
             ];
 
         }else{
              // store rules here - require image here
-             return [
+            return [
                 'name' =>                   'required',
                 'email' => [
                     'required',
                     'email',
                     (!is_null($this->staff)) ? Rule::unique('users', 'email')->ignore($this->staff->id) : Rule::unique('users', 'email'),
                 ],            
-                'tipo' =>                   'required',
+                'tipo' =>                   'required|regex:/^[A,F]+$/',
                 'password' =>               'required',
                 'foto' =>                   'image|max:8192',   // Máximum size = 8Mb
             ];

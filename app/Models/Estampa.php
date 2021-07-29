@@ -16,4 +16,9 @@ class Estampa extends Model
     {
         return $this->belongsTo(Categorias::class, 'categoria_id');
     }
+
+    public function tshirts()
+    {
+        return $this->hasMany(Tshirts::class);
+    }
 }

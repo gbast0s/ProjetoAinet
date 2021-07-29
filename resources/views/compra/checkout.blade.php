@@ -164,7 +164,7 @@
                                         <button class="btn btn-default update" type="submit" value="">Apagar carrinho</button>
                                     </form>
                                     <a class="btn btn-default update" href="{{ route('usuario.checkout') }}">Atualizar</a>
-                                    <form action="{{ route('usuario.carrinho.store_compra', ['cliente' => $cliente, 'total_encomenda' => $custoTotal] ) }}" id="formCheckout" method="POST">
+                                    <form action="{{ route('usuario.carrinho.store_compra') }}" id="formCheckout" method="POST">
                                         @csrf
                                         <button class="btn btn-default update" type="submit" value="" {{ $cliente->nif ? '' : 'disabled' }}>Confirmar carrinho</button>
                                     </form>

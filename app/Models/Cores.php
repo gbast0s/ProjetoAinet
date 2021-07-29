@@ -16,4 +16,9 @@ class Cores extends Model
     protected $fillable = ['codigo', 'nome'];
 
     public $timestamps = false;
+
+    public function tshirts()
+    {
+        return $this->hasMany(Tshirts::class);
+    }
 }

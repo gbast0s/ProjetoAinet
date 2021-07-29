@@ -96,7 +96,7 @@ class EstampasController extends Controller
 
     }
 
-    public function estampa_personalizada()
+    public function estampa_personalizada(Request $request)
     {
 
         $estampas_privadas = null;
