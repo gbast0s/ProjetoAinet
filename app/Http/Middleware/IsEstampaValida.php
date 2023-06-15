@@ -19,13 +19,13 @@ class IsEstampaValida
     public function handle(Request $request, Closure $next)
     {
         $id_cliente = $request->route('estampa')->cliente_id;
-        
+
         if ($id_cliente == null) {
             return $next($request);
         }
         elseif(Auth::user() != null && Auth::user()->id == $id_cliente)
         {
-            return $next($request);  
+            return $next($request);
         }
         else
         {

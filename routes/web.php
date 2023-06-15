@@ -35,10 +35,10 @@ Route::middleware(['auth', 'cliente'])->prefix('/')->name('usuario.')->group(fun
 
     Route::middleware(['carrinhoEmpty'])->group(function() {
 
-        Route::get('checkout', [CompraController::class, 'checkout'])->name('checkout') 
-            ->middleware('verified'); 
+        Route::get('checkout', [CompraController::class, 'checkout'])->name('checkout')
+            ->middleware('verified');
         Route::post('carrinho', [CompraController::class, 'store_compra'])->name('carrinho.store_compra');
-    });                                                  
+    });
 
 });
 

@@ -17,7 +17,7 @@ class EmailController extends Controller
     {
         // SEND EMAIL WITH MAILABLE CLASS
         // Send to user:
-        //$user = User::findOrFail(Auth::user()->id);
+        $user = User::findOrFail(Auth::user()->id);
         $tshirts = Tshirts::where('encomenda_id', $encomenda->id)->get();
 
         Mail::to($user)

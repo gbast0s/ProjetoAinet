@@ -24,7 +24,7 @@ class IsCliente
         }
         else
         {
-            return redirect('/')->with('notclient', 'Not Authorized!');
+            return redirect('/')->with('notclient', 'Não podes aceder aqui visto não seres cliente!');
         }
     }
 }

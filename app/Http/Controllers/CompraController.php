@@ -35,6 +35,8 @@ class CompraController extends Controller
 
         $carrinho = $request->session()->get('carrinho', []);
 
+        //Devia de ser tudo calculado de novo, DEVERIA DE TER UMA FUNCAO AUXILIAR PARA CALCUAR O GUITO DO CARRINHO
+
         $custo_total=0;
 
         foreach($carrinho as $pedido){
@@ -58,6 +60,7 @@ class CompraController extends Controller
         $carrinho = $request->session()->get('carrinho', []);
 
 
+        //Errado, porque podem adulterar o preço atual do carrinho
         if($estampa->cliente_id)
         {
             $preco_un = $validatedData['quantidade'] < 5 ? $preco->preco_un_proprio  : $preco->preco_un_proprio_desconto;
@@ -164,6 +167,7 @@ class CompraController extends Controller
 
     public function store_compra(Request $request)
     {
+        //Deveria de ser calculado o preco do lado do servidor e não usar o preco do carrinho
         $cliente = Clientes::where('id', Auth::user()->id)->first();
 
         if(!$cliente->nif){
@@ -173,7 +177,7 @@ class CompraController extends Controller
         }
 
         $carrinho = $request->session()->get('carrinho', []);
-        
+
         $custo_total = 0;
 
         foreach($carrinho as $pedido){
@@ -189,7 +193,7 @@ class CompraController extends Controller
         $newEncomenda->nif = $cliente->nif;
         $newEncomenda->endereco = $cliente->endereco;
         $newEncomenda->tipo_pagamento = $cliente->tipo_pagamento;
-        $newEncomenda->ref_pagamento = $cliente->ref_pagamento;  
+        $newEncomenda->ref_pagamento = $cliente->ref_pagamento;
 
         $newEncomenda->save();
 
@@ -210,7 +214,7 @@ class CompraController extends Controller
         }
 
         EmailController::enviar_email_encomenda_pendete($newEncomenda);
-        
+
         $request->session()->forget('carrinho');
 
         return redirect()->route('home')

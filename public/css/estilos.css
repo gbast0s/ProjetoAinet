@@ -1,0 +1,157 @@
+.alert {
+    padding: 1.25rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    font-size: 1.2rem;
+}
+
+.alert-success {
+    color: #000000;
+    background-color: #f3a63d;
+    border-color: black;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.alert-warning {
+    color: #000000;
+    background-color: #f9ca30;
+    border-color: #967511;
+}
+
+.alert-danger {
+    color: #000000;
+    background-color: #fe596a;
+    border-color: black;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #2fdffe;
+    border-color: #2f71fe;
+}
+
+.error {
+    padding-left: 10px;
+    color: red;
+}
+
+a.btn.btn-primary.btn-sm {
+    color: white;
+}
+
+.row-barras {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.colors {
+    float: left;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/*************************************
+ ****** Detalhes Encomendas CSS ******
+ *************************************/
+
+.dados-encomendas-1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.dados-cliente-encomendas,
+.dados-pagamento-encomendas {
+    /* border: 2px solid #4e73df; */
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+.dados-cliente-encomendas {
+    margin-right: 20px;
+}
+
+.lista-encomendas-feitas {
+    margin-bottom: 20px;
+}
+
+.dados-cliente-encomendas a:nth-child(2),
+.dados-cliente-encomendas a:nth-child(4),
+.dados-pagamento-encomendas a:nth-child(2),
+.dados-pagamento-encomendas a:nth-child(4),
+.dados-pagamento-encomendas a:nth-child(6),
+.produtos-tabela a:nth-child(1),
+.produtos-tabela a:nth-child(3),
+.produtos-tabela a:nth-child(5),
+.produtos-tabela a:nth-child(7) {
+    font-weight: bold;
+}
+
+.lista-encomendas-feitas,
+.produto-unitario {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.detalhes-encomendas img {
+    width: 150px;
+    background-color: #8888888c;
+    margin: 5px;
+    transition: all 0.5s ease;
+    border: none;
+}
+
+.detalhes-encomendas img:hover {
+    opacity: 60%;
+    transition: all 0.5s ease;
+    border: 2px solid #4e73df;
+}
+
+.produtos-tabela {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.produto-unitario {
+    border: 2px solid #4e73df;
+    width: 32%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 20px 20px 0;
+    justify-content: space-between;
+}
+
+.produto-unitario:nth-child(3n) {
+    margin-right: 0;
+}
+
+.botoes-detalhes {
+    display: flex;
+    flex-direction: row;
+    float: right;
+}
+
+.text-right {
+    margin-left: 10px;
+}
+
+@media (max-width: 1333px) {
+
+    .produto-unitario:nth-child(3n) {
+        margin-right: 20px;
+    }
+
+}
